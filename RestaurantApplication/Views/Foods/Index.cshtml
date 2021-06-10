@@ -1,0 +1,62 @@
+﻿@model IEnumerable<RestaurantApplication.Models.Food>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodReviewStar)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.FoodName, "Details", new { id = item.FoodID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfferPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodReviewStar)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FoodID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FoodID })
+        </td>
+    </tr>
+}
+
+</table>
