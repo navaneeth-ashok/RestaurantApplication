@@ -7,24 +7,27 @@
 @{ 
     int food_id = 0;
 }
-@foreach (var food in Model)
-{
-    <h2>@food.FoodName</h2>
-    <div>@food.FoodDescription</div>
-    <p>$@food.OfferPrice</p>
-    <p>
-        @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
-        {
-            <span>&#9733;</span>
-        }
-    </p>
-    var count = 0;
+<form method="POST" action="/OrderItems/PlaceOrder/">
+    @foreach (var food in Model)
+    {
+        <h2>@food.FoodName</h2>
+        <div>@food.FoodDescription</div>
+        <p>$@food.OfferPrice</p>
+        <p>
+            @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
+            {
+                <span>&#9733;</span>
+            }
+        </p>
+        <input type="hidden" name="foodID" value="@food.FoodID">
+        <p> <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp; <button id="add_@food_id" class="btn btn-success food_add">+</button> <input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /> &nbsp; &nbsp; <button id="remove_@food_id" class="btn btn-danger food_remove">-</button></p>
+        food_id++;
+    }
+    <input type="submit" value="Order!" />
+</form>
 
-    <p><button id="add_@food_id" class="food_add">+</button> &nbsp; <span id="order_amt">@count</span> &nbsp; <button id="remove_@food_id" class="food_remove">-</button></p>
-    food_id++;
-}
 
-<button>Submit</button>
+
 
 <script>
     window.onload = function () {
@@ -39,13 +42,15 @@
 
     }
     function addFood() {
-        var order_amt = this.parentElement.querySelector("#order_amt").innerHTML;
+        var order_amt = this.parentElement.querySelector(".foodQ").value;
         order_amt++;
-        this.parentElement.querySelector("#order_amt").innerHTML = order_amt;
+        this.parentElement.querySelector(".foodQ").value = order_amt;
+        return false;
     }
     function removeFood() {
-        var order_amt = this.parentElement.querySelector("#order_amt").innerHTML;
+        var order_amt = this.parentElement.querySelector(".foodQ").value;
         order_amt--;
-        this.parentElement.querySelector("#order_amt").innerHTML = order_amt;
+        this.parentElement.querySelector(".foodQ").value = order_amt;
+        return false;
     }
 </script>

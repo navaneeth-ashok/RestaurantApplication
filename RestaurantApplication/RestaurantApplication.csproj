@@ -231,6 +231,22 @@
     <Compile Include="Migrations\202105251939462_food-string.Designer.cs">
       <DependentUpon>202105251939462_food-string.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106102002149_FoodDTOID.cs" />
+    <Compile Include="Migrations\202106102002149_FoodDTOID.Designer.cs">
+      <DependentUpon>202106102002149_FoodDTOID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102114311_OrderIDINT.cs" />
+    <Compile Include="Migrations\202106102114311_OrderIDINT.Designer.cs">
+      <DependentUpon>202106102114311_OrderIDINT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102114533_OrderIDINT1.cs" />
+    <Compile Include="Migrations\202106102114533_OrderIDINT1.Designer.cs">
+      <DependentUpon>202106102114533_OrderIDINT1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102117269_OrderIDINT2.cs" />
+    <Compile Include="Migrations\202106102117269_OrderIDINT2.Designer.cs">
+      <DependentUpon>202106102117269_OrderIDINT2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -365,6 +381,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105251939462_food-string.resx">
       <DependentUpon>202105251939462_food-string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102002149_FoodDTOID.resx">
+      <DependentUpon>202106102002149_FoodDTOID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102114311_OrderIDINT.resx">
+      <DependentUpon>202106102114311_OrderIDINT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102114533_OrderIDINT1.resx">
+      <DependentUpon>202106102114533_OrderIDINT1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102117269_OrderIDINT2.resx">
+      <DependentUpon>202106102117269_OrderIDINT2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

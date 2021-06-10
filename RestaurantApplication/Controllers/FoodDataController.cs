@@ -25,6 +25,7 @@ namespace RestaurantApplication.Controllers
 
             Foods.ForEach(f => FoodDtos.Add(new FoodDto() {
 
+                FoodID = f.FoodID,
                 FoodName = f.FoodName,
                 FoodDescription = f.FoodDescription,
                 OfferPrice = f.OfferPrice,

@@ -37,7 +37,7 @@ namespace RestaurantApplication.Controllers
 
         // PUT: api/OrderIDsData/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutOrderID(string id, OrderID orderID)
+        public IHttpActionResult PutOrderID(int id, OrderID orderID)
         {
             if (!ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace RestaurantApplication.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OrderIDExists(string id)
+        private bool OrderIDExists(int id)
         {
             return db.OrderIDs.Count(e => e.OrderIDNumber == id) > 0;
         }

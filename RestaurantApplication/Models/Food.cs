@@ -22,7 +22,8 @@ namespace RestaurantApplication.Models
     }
 
     public class FoodDto
-    {  
+    {
+        public int FoodID { get; set; }
         public string FoodName { get; set; }
         public string FoodDescription { get; set; }
         public decimal OfferPrice { get; set; }

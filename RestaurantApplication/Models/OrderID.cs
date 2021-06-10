@@ -9,7 +9,7 @@ namespace RestaurantApplication.Models
     public class OrderID
     {
         [Key]
-        public string OrderIDNumber { get; set; }
+        public int OrderIDNumber { get; set; }
         public DateTime OrderIDTime { get; set; }
     }
 }

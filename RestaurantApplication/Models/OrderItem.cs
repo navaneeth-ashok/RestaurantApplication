@@ -24,7 +24,7 @@ namespace RestaurantApplication.Models
         public decimal SoldPrice { get; set; }
 
         [ForeignKey("OrderID")]
-        public string OrderIDNumber { get; set; }
+        public int OrderIDNumber { get; set; }
         public virtual OrderID OrderID { get; set; }
     }
 }

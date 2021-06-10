@@ -128,6 +128,27 @@ namespace RestaurantApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        // OrderItems/PlaceOrder/
+        [HttpPost]
+        public void PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity)
+        {
+            List<string> foodList = foodID.ToList();
+            List<string> quantityList = foodQuantity.ToList();
+            System.Diagnostics.Debug.WriteLine("FoodID" + foodList[0]);
+            System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[0]);
+            System.Diagnostics.Debug.WriteLine("FoodID" + foodList[1]);
+            System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[1]);
+            System.Diagnostics.Debug.WriteLine(DateTime.Now);
+
+            OrderID newOrder = new OrderID
+            {
+                OrderIDTime = DateTime.Now
+            };
+            db.OrderIDs.Add(newOrder);
+            db.SaveChanges();
+            System.Diagnostics.Debug.WriteLine("OrderID" + newOrder.OrderIDNumber);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
