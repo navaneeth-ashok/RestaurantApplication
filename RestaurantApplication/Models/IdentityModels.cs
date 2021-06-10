@@ -35,7 +35,7 @@ namespace RestaurantApplication.Models
         public DbSet<Booking> Bookings { get; set; }
 
         // add OrderItems to the system
-        public DbSet<OrderItem> OrdersItems { get; set; } 
+        public DbSet<OrderItem> OrdersItems { get; set; }
 
         // add OrderID to the system
         public DbSet<OrderID> OrderIDs { get; set; }

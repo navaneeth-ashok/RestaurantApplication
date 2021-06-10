@@ -188,8 +188,6 @@
     <Compile Include="Controllers\FoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\OrderIDsController.cs" />
-    <Compile Include="Controllers\OrderIDsDataController.cs" />
     <Compile Include="Controllers\OrderItemsController.cs" />
     <Compile Include="Controllers\OrderItemsDataController.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,6 +244,42 @@
     <Compile Include="Migrations\202106102117269_OrderIDINT2.cs" />
     <Compile Include="Migrations\202106102117269_OrderIDINT2.Designer.cs">
       <DependentUpon>202106102117269_OrderIDINT2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102127350_OrderIDtoString.cs" />
+    <Compile Include="Migrations\202106102127350_OrderIDtoString.Designer.cs">
+      <DependentUpon>202106102127350_OrderIDtoString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102134517_OrderIDDelete.cs" />
+    <Compile Include="Migrations\202106102134517_OrderIDDelete.Designer.cs">
+      <DependentUpon>202106102134517_OrderIDDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102138157_OrderIDDeleteRename.cs" />
+    <Compile Include="Migrations\202106102138157_OrderIDDeleteRename.Designer.cs">
+      <DependentUpon>202106102138157_OrderIDDeleteRename.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102139430_OrderIDDeleteNewAdd.cs" />
+    <Compile Include="Migrations\202106102139430_OrderIDDeleteNewAdd.Designer.cs">
+      <DependentUpon>202106102139430_OrderIDDeleteNewAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102141472_OrderIDDeleteNewAdd1.cs" />
+    <Compile Include="Migrations\202106102141472_OrderIDDeleteNewAdd1.Designer.cs">
+      <DependentUpon>202106102141472_OrderIDDeleteNewAdd1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102154149_OrderIDDeleteComplete.cs" />
+    <Compile Include="Migrations\202106102154149_OrderIDDeleteComplete.Designer.cs">
+      <DependentUpon>202106102154149_OrderIDDeleteComplete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102159223_OrderIDNewAdd.cs" />
+    <Compile Include="Migrations\202106102159223_OrderIDNewAdd.Designer.cs">
+      <DependentUpon>202106102159223_OrderIDNewAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102200234_OrderIDNewAdd1.cs" />
+    <Compile Include="Migrations\202106102200234_OrderIDNewAdd1.Designer.cs">
+      <DependentUpon>202106102200234_OrderIDNewAdd1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106102201044_OrderIDNewUpdateFK.cs" />
+    <Compile Include="Migrations\202106102201044_OrderIDNewUpdateFK.Designer.cs">
+      <DependentUpon>202106102201044_OrderIDNewUpdateFK.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -393,6 +427,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106102117269_OrderIDINT2.resx">
       <DependentUpon>202106102117269_OrderIDINT2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102127350_OrderIDtoString.resx">
+      <DependentUpon>202106102127350_OrderIDtoString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102134517_OrderIDDelete.resx">
+      <DependentUpon>202106102134517_OrderIDDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102138157_OrderIDDeleteRename.resx">
+      <DependentUpon>202106102138157_OrderIDDeleteRename.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102139430_OrderIDDeleteNewAdd.resx">
+      <DependentUpon>202106102139430_OrderIDDeleteNewAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102141472_OrderIDDeleteNewAdd1.resx">
+      <DependentUpon>202106102141472_OrderIDDeleteNewAdd1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102154149_OrderIDDeleteComplete.resx">
+      <DependentUpon>202106102154149_OrderIDDeleteComplete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102159223_OrderIDNewAdd.resx">
+      <DependentUpon>202106102159223_OrderIDNewAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102200234_OrderIDNewAdd1.resx">
+      <DependentUpon>202106102200234_OrderIDNewAdd1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106102201044_OrderIDNewUpdateFK.resx">
+      <DependentUpon>202106102201044_OrderIDNewUpdateFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
