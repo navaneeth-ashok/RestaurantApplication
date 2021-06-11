@@ -135,3 +135,8 @@ C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.dll
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.pdb
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.csprojAssemblyReference.cache
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.OrderItemOrdeIDPrimaryKey.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.OrderIDStatusAdded.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingStatus.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingStatus1.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingStatus2.resources

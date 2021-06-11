@@ -283,6 +283,26 @@
     <Compile Include="Migrations\202106102201044_OrderIDNewUpdateFK.Designer.cs">
       <DependentUpon>202106102201044_OrderIDNewUpdateFK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106110626474_OrderItemOrdeIDPrimaryKey.cs" />
+    <Compile Include="Migrations\202106110626474_OrderItemOrdeIDPrimaryKey.Designer.cs">
+      <DependentUpon>202106110626474_OrderItemOrdeIDPrimaryKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106110637024_OrderIDStatusAdded.cs" />
+    <Compile Include="Migrations\202106110637024_OrderIDStatusAdded.Designer.cs">
+      <DependentUpon>202106110637024_OrderIDStatusAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106110739557_BookingStatus.cs" />
+    <Compile Include="Migrations\202106110739557_BookingStatus.Designer.cs">
+      <DependentUpon>202106110739557_BookingStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106110741176_BookingStatus1.cs" />
+    <Compile Include="Migrations\202106110741176_BookingStatus1.Designer.cs">
+      <DependentUpon>202106110741176_BookingStatus1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106110742227_BookingStatus2.cs" />
+    <Compile Include="Migrations\202106110742227_BookingStatus2.Designer.cs">
+      <DependentUpon>202106110742227_BookingStatus2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -368,11 +388,10 @@
     <Content Include="Views\OrderItems\Details.cshtml" />
     <Content Include="Views\OrderItems\Edit.cshtml" />
     <Content Include="Views\OrderItems\Index.cshtml" />
-    <Content Include="Views\OrderIDs\Create.cshtml" />
-    <Content Include="Views\OrderIDs\Delete.cshtml" />
     <Content Include="Views\OrderIDs\Details.cshtml" />
     <Content Include="Views\OrderIDs\Edit.cshtml" />
     <Content Include="Views\OrderIDs\Index.cshtml" />
+    <Content Include="Views\Bookings\ViewBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -456,6 +475,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106102201044_OrderIDNewUpdateFK.resx">
       <DependentUpon>202106102201044_OrderIDNewUpdateFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106110626474_OrderItemOrdeIDPrimaryKey.resx">
+      <DependentUpon>202106110626474_OrderItemOrdeIDPrimaryKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106110637024_OrderIDStatusAdded.resx">
+      <DependentUpon>202106110637024_OrderIDStatusAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106110739557_BookingStatus.resx">
+      <DependentUpon>202106110739557_BookingStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106110741176_BookingStatus1.resx">
+      <DependentUpon>202106110741176_BookingStatus1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106110742227_BookingStatus2.resx">
+      <DependentUpon>202106110742227_BookingStatus2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

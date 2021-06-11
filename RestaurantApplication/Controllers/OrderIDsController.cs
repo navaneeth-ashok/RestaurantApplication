@@ -78,7 +78,7 @@ namespace RestaurantApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderIDNumber,OrderIDTime")] OrderID orderID)
+        public ActionResult Edit([Bind(Include = "OrderIDNumber,OrderIDTime,Status")] OrderID orderID)
         {
             if (ModelState.IsValid)
             {

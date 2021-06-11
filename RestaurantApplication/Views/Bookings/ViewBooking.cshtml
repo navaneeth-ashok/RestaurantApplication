@@ -1,0 +1,51 @@
+﻿@model RestaurantApplication.Models.BookingDto
+
+@{
+    ViewBag.Title = "ViewBooking";
+}
+
+<h2>ViewBooking</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfOccupants)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfOccupants)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Order Food", "List", new { controller = "Food" })
+</p>

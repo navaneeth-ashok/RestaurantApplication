@@ -37,6 +37,26 @@ namespace RestaurantApplication.Controllers
             return View(booking);
         }
 
+        public ActionResult ViewBooking(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Booking booking = db.Bookings.Find(id);
+            if (booking == null)
+            {
+                return HttpNotFound();
+            }
+            BookingDto bookingDetail = new BookingDto
+            {
+                BookingID = booking.BookingID,
+                Status = booking.Status,
+                NumberOfOccupants = booking.NumberOfOccupants
+            };
+            return View(bookingDetail);
+        }
+
         // GET: Bookings/Create
         public ActionResult Create()
         {
@@ -54,7 +74,7 @@ namespace RestaurantApplication.Controllers
             {
                 db.Bookings.Add(booking);
                 db.SaveChanges();
-                return RedirectToAction("List", "Food");
+                return RedirectToAction("ViewBooking/" + booking.BookingID);
             }
             return View(booking);
         }
@@ -81,7 +101,7 @@ namespace RestaurantApplication.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookingID,TableNumber,NumberOfOccupants,Allergies,BookingDateTime,UserID")] Booking booking)
+        public ActionResult Edit([Bind(Include = "BookingID,TableNumber,NumberOfOccupants,Allergies,BookingDateTime,UserID,Status")] Booking booking)
         {
             if (ModelState.IsValid)
             {

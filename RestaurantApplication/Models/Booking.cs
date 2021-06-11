@@ -16,5 +16,22 @@ namespace RestaurantApplication.Models
 
         // future enhancement of user table
         public string UserID { get; set; }
+
+        public BookingStatus Status { get; set; }
+    }
+
+    public class BookingDto
+    {
+        public int BookingID { get; set; }
+        public int NumberOfOccupants { get; set; }
+        public DateTime BookingDateTime { get; set; }
+        public BookingStatus Status { get; set; }
+    }
+
+    public enum BookingStatus
+    {
+        Pending,
+        Confirmed,
+        Cancelled
     }
 }
