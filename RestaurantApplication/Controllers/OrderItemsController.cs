@@ -145,7 +145,8 @@ namespace RestaurantApplication.Controllers
             // with a new ID and datatime
             OrderID newOrder = new OrderID
             {
-                OrderIDTime = DateTime.Now
+                OrderIDTime = DateTime.Now,
+                Status = OrderStatus.Placed
             };
             db.OrderIDs.Add(newOrder);
             db.SaveChanges();
