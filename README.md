@@ -49,10 +49,10 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 
 ## Things to Add
 
-[ ] Once the order is delivered/served, the user will be presented with a page to rate the food.
-[ ] This review is appended to the existing item's rating.
-[ ] Once an order is completed the Order Count of the item will be incremented by 1.
-[ ] Authorize users.
+- [ ] Once the order is delivered/served, the user will be presented with a page to rate the food.
+- [ ] This review is appended to the existing item's rating.
+- [ ] Once an order is completed the Order Count of the item will be incremented by 1.
+- [ ] Authorize users.
 
 ## Known Bugs
 
