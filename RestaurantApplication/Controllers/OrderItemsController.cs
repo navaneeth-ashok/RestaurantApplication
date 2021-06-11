@@ -159,8 +159,8 @@ namespace RestaurantApplication.Controllers
             // iterate over the foodList and quantityList, fetch the food details
             foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
             {
-                System.Diagnostics.Debug.WriteLine(fd.Item1 + fd.Item2);
-                Food food = db.Foods.Find(fd.Item1);
+                System.Diagnostics.Debug.WriteLine(fd.Item1 + " " + fd.Item2);
+                Food food = db.Foods.Find(Convert.ToInt32(fd.Item1));
                 OrderItem newOrderItem = new OrderItem
                 {
                     FoodID = food.FoodID,
@@ -174,7 +174,7 @@ namespace RestaurantApplication.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("OrderIDs/Details/" + newOrder.OrderIDNumber);
+            return RedirectToAction("/Details/" + newOrder.OrderIDNumber, "OrderIDs");
 
 
 
