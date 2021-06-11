@@ -22,3 +22,10 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.menu-form input{
+    max-width: 50px;
+    border-radius: 5px;
+    padding:5px;
+    border: 2px solid grey;
+}

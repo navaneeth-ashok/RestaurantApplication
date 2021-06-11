@@ -19,11 +19,13 @@
                 <span>&#9733;</span>
             }
         </p>
-        <input type="hidden" name="foodID" value="@food.FoodID">
-        <p> <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp; <button id="add_@food_id" class="btn btn-success food_add">+</button> <input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /> &nbsp; &nbsp; <button id="remove_@food_id" class="btn btn-danger food_remove">-</button></p>
+        <div class="menu-form">
+            <input type="hidden" name="foodID" value="@food.FoodID">
+            <p> <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp; <button id="add_@food_id" class="btn btn-success food_add">+</button> <input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" />&nbsp;<button id="remove_@food_id" class="btn btn-danger food_remove">-</button></p>
+        </div>
         food_id++;
     }
-    <input type="submit" value="Order!" />
+    <input type="submit" value="Order!" class="btn btn-primary" />
 </form>
 
 

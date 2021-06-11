@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<RestaurantApplication.Models.Booking>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Bookings Manage";
 }
 
-<h2>Index</h2>
+<h2>Manage Booking</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add new booking", "Create")
 </p>
 <table class="table">
     <tr>
@@ -28,6 +28,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
         </th>
         <th></th>
     </tr>
@@ -52,6 +55,9 @@
     <td>
         @Html.DisplayFor(modelItem => item.UserID)
     </td>
+    <th>
+        @Html.DisplayFor(modelItem => item.Status)
+    </th>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.BookingID }) |
         @Html.ActionLink("Details", "Details", new { id = item.BookingID }) |

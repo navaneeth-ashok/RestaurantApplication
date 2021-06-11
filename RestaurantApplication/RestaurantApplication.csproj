@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BookingsController.cs" />
     <Compile Include="Controllers\BookingsDataController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
@@ -311,6 +312,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderID.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\ViewModel\BookingIDFoodMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -392,6 +394,8 @@
     <Content Include="Views\OrderIDs\Edit.cshtml" />
     <Content Include="Views\OrderIDs\Index.cshtml" />
     <Content Include="Views\Bookings\ViewBooking.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Food\ListNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Booking</h4>
+    <h4>BookingID :  @Html.DisplayFor(model => model.BookingID) </h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.BookingID)
@@ -35,7 +35,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Allergies, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Allergies, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Allergies, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.Allergies, "", new { @class = "text-danger" })
         </div>
     </div>

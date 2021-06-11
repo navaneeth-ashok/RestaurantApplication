@@ -1,7 +1,7 @@
 ﻿@model RestaurantApplication.Models.Food
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit " + @Html.DisplayFor(model => model.FoodName);
 }
 
 <h2>Edit</h2>
@@ -9,9 +9,9 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Food</h4>
+        <h4>@Html.DisplayFor(model => model.FoodName)</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.FoodID)

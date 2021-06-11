@@ -130,7 +130,7 @@ namespace RestaurantApplication.Controllers
 
         // OrderItems/PlaceOrder/
         [HttpPost]
-        public ActionResult PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity)
+        public ActionResult PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity, int? bookingID)
         {
             List<string> foodList = foodID.ToList();
             List<string> quantityList = foodQuantity.ToList();
@@ -156,6 +156,12 @@ namespace RestaurantApplication.Controllers
             // create the order with this orderID
             // fetch food details -> price, soldprice / offerprice etc
 
+            // Booking id default Setting
+            int bookingIDNew = 1;
+            if(bookingID != null)
+            {
+                bookingIDNew = (int)bookingID;
+            }
 
             // iterate over the foodList and quantityList, fetch the food details
             foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
@@ -165,7 +171,7 @@ namespace RestaurantApplication.Controllers
                 OrderItem newOrderItem = new OrderItem
                 {
                     FoodID = food.FoodID,
-                    BookingID = 1, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
+                    BookingID = bookingIDNew, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
                     Quantity = Convert.ToInt32(fd.Item2),
                     FoodPrice = food.FoodPrice,
                     SoldPrice = food.OfferPrice,
