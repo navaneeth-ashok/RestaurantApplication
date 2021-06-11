@@ -56,4 +56,4 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 
 ## Known Bugs
 
-~~ BookingDateTime shows 01-01-0001 00:00:00 after the customer books the table ~~
+~~BookingDateTime shows 01-01-0001 00:00:00 after the customer books the table~~
