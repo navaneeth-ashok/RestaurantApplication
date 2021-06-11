@@ -11,5 +11,23 @@ namespace RestaurantApplication.Models
         [Key]
         public int OrderIDNumber { get; set; }
         public DateTime OrderIDTime { get; set; }
+        public OrderStatus Status { get; set; }
+
+    }
+
+    public enum OrderStatus
+    {
+        Placed,
+        Confirmed,
+        Cooking,
+        Prepared,
+        OnDelivery,
+        Delivered,
+        Served,
+        Paid,
+        CancelledByUser,
+        CancelledByRestaurant,
+        CancelledByDelivery,
+        Completed
     }
 }

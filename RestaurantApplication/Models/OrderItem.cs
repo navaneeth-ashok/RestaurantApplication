@@ -18,13 +18,20 @@ namespace RestaurantApplication.Models
         [ForeignKey("Booking")]
         public int BookingID { get; set;  }
         public virtual Booking Booking { get; set; }
+        [Key, Column(Order = 2)]
+        [ForeignKey("OrderID")]
+        public int OrderIDNumber { get; set; }
+        public virtual OrderID OrderID { get; set; }
+
+
+
         public int Quantity { get; set; }
 
         public decimal FoodPrice { get; set; }
         public decimal SoldPrice { get; set; }
 
-        [ForeignKey("OrderID")]
-        public int OrderIDNumber { get; set; }
-        public virtual OrderID OrderID { get; set; }
+        //[ForeignKey("OrderID")]
+        //public int OrderIDNumber { get; set; }
+        //public virtual OrderID OrderID { get; set; }
     }
 }
