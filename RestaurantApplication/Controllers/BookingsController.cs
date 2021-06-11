@@ -52,7 +52,8 @@ namespace RestaurantApplication.Controllers
             {
                 BookingID = booking.BookingID,
                 Status = booking.Status,
-                NumberOfOccupants = booking.NumberOfOccupants
+                NumberOfOccupants = booking.NumberOfOccupants,
+                BookingDateTime = booking.BookingDateTime
             };
             return View(bookingDetail);
         }
