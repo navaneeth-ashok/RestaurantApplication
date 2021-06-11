@@ -134,3 +134,4 @@ C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.csproj.CopyComplete
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.dll
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.pdb
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.csprojAssemblyReference.cache

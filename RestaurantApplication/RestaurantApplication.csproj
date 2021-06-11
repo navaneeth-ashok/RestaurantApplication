@@ -188,6 +188,8 @@
     <Compile Include="Controllers\FoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderIDsController.cs" />
+    <Compile Include="Controllers\OrderIDsDataController.cs" />
     <Compile Include="Controllers\OrderItemsController.cs" />
     <Compile Include="Controllers\OrderItemsDataController.cs" />
     <Compile Include="Global.asax.cs">

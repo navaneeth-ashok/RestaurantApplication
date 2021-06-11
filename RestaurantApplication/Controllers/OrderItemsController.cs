@@ -130,16 +130,19 @@ namespace RestaurantApplication.Controllers
 
         // OrderItems/PlaceOrder/
         [HttpPost]
-        public void PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity)
+        public ActionResult PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity)
         {
             List<string> foodList = foodID.ToList();
             List<string> quantityList = foodQuantity.ToList();
-            System.Diagnostics.Debug.WriteLine("FoodID" + foodList[0]);
-            System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[0]);
-            System.Diagnostics.Debug.WriteLine("FoodID" + foodList[1]);
-            System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[1]);
-            System.Diagnostics.Debug.WriteLine(DateTime.Now);
+            //System.Diagnostics.Debug.WriteLine("FoodID" + foodList[0]);
+            //System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[0]);
+            //System.Diagnostics.Debug.WriteLine("FoodID" + foodList[1]);
+            //System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[1]);
+            //System.Diagnostics.Debug.WriteLine(DateTime.Now);
 
+
+            // on receiving order from the customer, create a new orderID object
+            // with a new ID and datatime
             OrderID newOrder = new OrderID
             {
                 OrderIDTime = DateTime.Now
@@ -147,6 +150,34 @@ namespace RestaurantApplication.Controllers
             db.OrderIDs.Add(newOrder);
             db.SaveChanges();
             System.Diagnostics.Debug.WriteLine("OrderID" + newOrder.OrderIDNumber);
+
+            // once the orderID is generated,
+            // create the order with this orderID
+            // fetch food details -> price, soldprice / offerprice etc
+
+
+            // iterate over the foodList and quantityList, fetch the food details
+            foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
+            {
+                System.Diagnostics.Debug.WriteLine(fd.Item1 + fd.Item2);
+                Food food = db.Foods.Find(fd.Item1);
+                OrderItem newOrderItem = new OrderItem
+                {
+                    FoodID = food.FoodID,
+                    BookingID = 1, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
+                    Quantity = Convert.ToInt32(fd.Item2),
+                    FoodPrice = food.FoodPrice,
+                    SoldPrice = food.OfferPrice,
+                    OrderIDNumber = newOrder.OrderIDNumber
+                };
+                db.OrdersItems.Add(newOrderItem);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("OrderIDs/Details/" + newOrder.OrderIDNumber);
+
+
+
         }
 
         protected override void Dispose(bool disposing)
