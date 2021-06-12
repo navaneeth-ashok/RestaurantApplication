@@ -8,50 +8,52 @@
 @{
     int food_id = 0;
 }
-<form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();">
-    @foreach (var food in Model)
-    {
-        <div class="orderList container">
-            <div class="row">
-                <div class="orderDetail col-md-8">
-                    <h3>@food.FoodName</h3>
-                    <div>@food.FoodDescription</div>
-                    <p id="foodPrice_@food_id" class="foodPrice">$@food.OfferPrice</p>
-                    <div>
-                        @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
-                        {
-                            <span>&#9733;</span>
-                        }
+<div class="ms-auto me-auto menu">
+    <form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();">
+        @foreach (var food in Model)
+        {
+            <div class="orderList container">
+                <div class="row">
+                    <div class="orderDetail col-md-8">
+                        <h3>@food.FoodName</h3>
+                        <div>@food.FoodDescription</div>
+                        <p id="foodPrice_@food_id" class="foodPrice">$@food.OfferPrice</p>
+                        <div>
+                            @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
+                            {
+                                <span>&#9733;</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="menu-form orderAction col-md-4">
+                        <input type="hidden" name="foodID" value="@food.FoodID">
+                        <div class="orderButtons ms-auto">
+                            <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove"><span class="orderButtonText">-</span></button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /><button id="add_@food_id" class="btn btn-success food_add"><span class="orderButtonText">+</span></button>
+                        </div>
+                        @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
                     </div>
                 </div>
-                <div class="menu-form orderAction col-md-4">
-                    <input type="hidden" name="foodID" value="@food.FoodID">
-                    <div class="orderButtons ms-auto">
-                        <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove"><span class="orderButtonText">-</span></button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /><button id="add_@food_id" class="btn btn-success food_add"><span class="orderButtonText">+</span></button>
+            </div>
+            <hr />
+            food_id++;
+        }
+        <div class="orderBar fixed-top fixed-top-offset container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div id="orderWarning">Oops!!! There is nothing in your cart. Add an item to continue.</div>
+                    <div class="col mainOrderButton">
+                        <div class="totalAmount">Total: <span id="totalAmt"></span>$</div>
+                        <input type="submit" value="Order!" class="btn btn-primary " />
                     </div>
-                    @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
                 </div>
             </div>
-        </div>
-        <hr />
-        food_id++;
-    }
-<div class="orderBar fixed-bottom container-fluid">
-    <div class="container">
-        <div class="row">
-            <div id="orderWarning">Oops!!! There is nothing in your cart. Add an item to continue.</div>
-            <div class="col mainOrderButton">
-                <div class="totalAmount">Total: <span id="totalAmt"></span>$</div>
-                <input type="submit" value="Order!" class="btn btn-primary " />
-            </div>
-        </div>
-    </div>
-    
-    
-    
-</div>
 
-</form>
+
+
+        </div>
+
+    </form>
+</div>
 
 
 

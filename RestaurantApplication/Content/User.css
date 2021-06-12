@@ -43,17 +43,18 @@ body {
 }
 
 .user-body {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.75);
     /*background: linear-gradient(90deg, #21252900 50%);*/
     padding: 30px;
 }
 
 .bg-dark {
-    background-color: #000000c7 !important;
+    background-color: #131313 !important;
+    padding: 40px;
 }
 
 .nav-link {
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .orderButtons {
@@ -114,6 +115,15 @@ h2{
     padding: 28px;
 }
 
+.menu{
+    max-width: 60%;
+}
+
+.fixed-top-offset{
+    top: 150px;
+    width: 280px;
+    right: -1000px;
+}
 /* set a max-width for horizontal fluid layout and make it centered */
 .container-fluid {
     margin-right: auto;
