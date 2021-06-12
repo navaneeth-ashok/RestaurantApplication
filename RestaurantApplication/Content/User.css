@@ -27,6 +27,8 @@ textarea {
     border-radius: 5px;
     padding: 5px;
     border: 2px solid grey;
+    text-align: center;
+    font: inherit;
 }
 
 body {
@@ -75,9 +77,21 @@ body {
 
 .food_remove{
     margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    padding: 0px;
 }
 .food_add {
     margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+
+.orderButtonText{
+    font-size:2em;
+    position:relative;
+    top:-13px;
 }
 .foodQ {
     height: 40px;
@@ -86,6 +100,43 @@ body {
     top: 3px;
 }
 
+.orderList h3{
+    text-transform: lowercase;
+}
+
+h2{
+    text-align: center;
+}
+
+.orderBar {
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    padding: 28px;
+}
+
+/* set a max-width for horizontal fluid layout and make it centered */
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1200px;
+}
+
+.mainOrderButton{
+    text-align: right;
+}
+
+.totalAmount{
+    width: 100px;
+    display:inline-block;
+    text-align:left;
+}
+
+#orderWarning {
+    text-align:center;
+    color: red;
+    font-weight: bolder;
+    display: none;
+}
 
 @media only screen and (max-width: 768px) {
     .orderButtons {
