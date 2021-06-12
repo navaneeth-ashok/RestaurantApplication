@@ -180,6 +180,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap5\bootstrap.css" />
+    <Content Include="Content\images\credits.txt" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BookingsController.cs" />
@@ -321,6 +323,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\site-background.jpg" />
+    <Content Include="Scripts\bootstrap5\bootstrap.bundle.min.js" />
+    <Content Include="Content\bootstrap5\bootstrap.min.css" />
+    <Content Include="Content\User.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -396,6 +402,7 @@
     <Content Include="Views\Bookings\ViewBooking.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Food\ListNew.cshtml" />
+    <Content Include="Views\Shared\_UserPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

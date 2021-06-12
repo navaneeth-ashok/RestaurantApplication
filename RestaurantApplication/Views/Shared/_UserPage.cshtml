@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ABC Restaurant</title>
+    @Styles.Render("~/Content/bootstrap5")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap5")
+    @RenderSection("scripts", required: false)
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                @Html.ActionLink("ABC Pizzeria", "Index", new { controller = "Home" }, new { @class = "navbar-brand navbar-brand-centered" })
+                @*<a class="navbar-brand" href="#">ABC Pizzeria</a>*@
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @*<li class="nav-item">
+                        @Html.ActionLink("Home", "Index", new { controller = "Home" }, new { @class = "nav-link text-light" })
+                    </li>*@
+                    <li class="nav-item">
+                        @Html.ActionLink("Menu", "List", new { controller = "Food" }, new { @class = "nav-link text-light" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Book Table", "Create", new { controller = "Bookings" }, new { @class = "nav-link text-light" })
+                    </li>
+                    @*<li class="nav-item">
+                @Html.ActionLink("Manage", "Index", new { controller = "Admin" }, new { @class = "nav-link text-dark" })
+            </li>*@
+                </ul>
+                @*@Html.Partial("_LoginPartial")*@
+                @Html.ActionLink("Manage", "Index", new { controller = "Admin" }, new { @class = "nav-link text-light" })
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        <div class="user-body">
+            @RenderBody()
+        </div>
+        
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ABC Restaurant</p>
+        </footer>
+    </div>
+
+
+</body>
+</html>
