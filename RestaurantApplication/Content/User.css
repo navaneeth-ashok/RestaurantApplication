@@ -1,0 +1,60 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.menu-form input {
+    max-width: 50px;
+    border-radius: 5px;
+    padding: 5px;
+    border: 2px solid grey;
+}
+
+body {
+    background-image: url(../Content/images/site-background.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: antiquewhite;
+}
+
+.user-body {
+    background-color: rgba(0, 0, 0, 0.9);
+    /*background: linear-gradient(90deg, #21252900 50%);*/
+    padding: 30px;
+}
+
+.bg-dark {
+    background-color: #21252900 !important;
+}
+
+.nav-link {
+    font-size: 1.5em;
+}
+
+.orderButtons {
+    width: 210px;
+    padding-top: 40px;
+}

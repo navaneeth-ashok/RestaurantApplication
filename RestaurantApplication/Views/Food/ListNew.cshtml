@@ -1,6 +1,7 @@
 ﻿@model RestaurantApplication.Models.ViewModel.BookingIDFoodMenu
 @{
     ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_UserPage.cshtml";
 }
 
 <h2>Menu</h2>
@@ -22,7 +23,7 @@
         </p>
         <div class="menu-form">
             <input type="hidden" name="foodID" value="@food.FoodID">
-            <p> <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp; <button id="add_@food_id" class="btn btn-success food_add">+</button> <input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /> &nbsp; &nbsp; <button id="remove_@food_id" class="btn btn-danger food_remove">-</button></p>
+            <div class="orderMenu"> <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp; <button id="add_@food_id" class="btn btn-success food_add">+</button> <input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /> &nbsp; &nbsp; <button id="remove_@food_id" class="btn btn-danger food_remove">-</button></div>
         </div>
         food_id++;
     }

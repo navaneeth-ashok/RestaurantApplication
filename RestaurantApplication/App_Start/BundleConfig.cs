@@ -25,6 +25,15 @@ namespace RestaurantApplication
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // bootstrap5 bundle
+            bundles.Add(new Bundle("~/bundles/bootstrap5").Include(
+                      "~/Scripts/bootstrap5/bootstrap.bundle.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap5").Include(
+                      "~/Content/bootstrap5/bootstrap.css",
+                      "~/Content/User.css"));
+
         }
     }
 }
