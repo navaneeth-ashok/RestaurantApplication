@@ -315,6 +315,7 @@
     <Compile Include="Models\OrderID.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\ViewModel\BookingIDFoodMenu.cs" />
+    <Compile Include="Models\ViewModel\OrderStatusFoodDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

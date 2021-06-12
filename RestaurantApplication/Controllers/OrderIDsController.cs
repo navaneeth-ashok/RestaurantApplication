@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RestaurantApplication.Models;
+using RestaurantApplication.Models.ViewModel;
 
 namespace RestaurantApplication.Controllers
 {
@@ -28,11 +29,28 @@ namespace RestaurantApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             OrderID orderID = db.OrderIDs.Find(id);
+            int orderIDToCheck = (int)id;
+            List<OrderItem> orderItems = db.OrdersItems.Where(o => o.OrderID.OrderIDNumber == orderIDToCheck).ToList();
+            // debug code
+            decimal amount = 0;
+            foreach( var item in orderItems)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.FoodPrice);
+                amount += item.Quantity * item.SoldPrice;
+            }
+
+            OrderStatusFoodDetail orderStatusFoodDetail = new OrderStatusFoodDetail
+            {
+                OrderIDClassDetails = orderID,
+                OrderItemDetails = orderItems,
+                TotalOrderAmount = amount
+            };
+
             if (orderID == null)
             {
                 return HttpNotFound();
             }
-            return View(orderID);
+            return View(orderStatusFoodDetail);
         }
 
         // GET: OrderIDs/Create
