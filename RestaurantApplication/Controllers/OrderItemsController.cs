@@ -167,18 +167,22 @@ namespace RestaurantApplication.Controllers
             foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
             {
                 System.Diagnostics.Debug.WriteLine(fd.Item1 + " " + fd.Item2);
-                Food food = db.Foods.Find(Convert.ToInt32(fd.Item1));
-                OrderItem newOrderItem = new OrderItem
+                if(Convert.ToInt32(fd.Item2) > 0)
                 {
-                    FoodID = food.FoodID,
-                    BookingID = bookingIDNew, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
-                    Quantity = Convert.ToInt32(fd.Item2),
-                    FoodPrice = food.FoodPrice,
-                    SoldPrice = food.OfferPrice,
-                    OrderIDNumber = newOrder.OrderIDNumber
-                };
-                db.OrdersItems.Add(newOrderItem);
-                db.SaveChanges();
+                    Food food = db.Foods.Find(Convert.ToInt32(fd.Item1));
+                    OrderItem newOrderItem = new OrderItem
+                    {
+                        FoodID = food.FoodID,
+                        BookingID = bookingIDNew, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
+                        Quantity = Convert.ToInt32(fd.Item2),
+                        FoodPrice = food.FoodPrice,
+                        SoldPrice = food.OfferPrice,
+                        OrderIDNumber = newOrder.OrderIDNumber
+                    };
+                    db.OrdersItems.Add(newOrderItem);
+                    db.SaveChanges();
+                }
+                
             }
 
             return RedirectToAction("/Details/" + newOrder.OrderIDNumber, "OrderIDs");
