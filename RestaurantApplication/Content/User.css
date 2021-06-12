@@ -47,7 +47,7 @@ body {
 }
 
 .bg-dark {
-    background-color: #21252900 !important;
+    background-color: #000000c7 !important;
 }
 
 .nav-link {
@@ -55,6 +55,41 @@ body {
 }
 
 .orderButtons {
-    width: 210px;
+    width: 230px;
     padding-top: 40px;
+}
+
+.navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 160px;
+    text-align: center;
+    background-color: transparent;
+}
+
+.navbar > .container .navbar-brand-centered,
+.navbar > .container-fluid .navbar-brand-centered {
+    margin-left: -80px;
+}
+
+.food_remove{
+    margin-right: 10px;
+}
+.food_add {
+    margin-left: 10px;
+}
+.foodQ {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    top: 3px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .orderButtons {
+        padding-top: 5px;
+        padding-bottom: 15px;
+    }
 }

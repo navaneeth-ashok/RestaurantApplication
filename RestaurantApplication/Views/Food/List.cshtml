@@ -17,18 +17,19 @@
                     <h2>@food.FoodName</h2>
                     <div>@food.FoodDescription</div>
                     <p>$@food.OfferPrice</p>
-                    <p>
+                    <div>
                         @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
                         {
                             <span>&#9733;</span>
                         }
-                    </p>
+                    </div>
                 </div>
                 <div class="menu-form orderAction col-md-4">
                     <input type="hidden" name="foodID" value="@food.FoodID">
                     <div class="orderButtons">
                         <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove">-</button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" />&nbsp;<button id="add_@food_id" class="btn btn-success food_add">+</button>
                     </div>
+                    @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
                 </div>
             </div>
         </div>
@@ -60,8 +61,11 @@
     }
     function removeFood() {
         var order_amt = this.parentElement.querySelector(".foodQ").value;
-        order_amt--;
-        this.parentElement.querySelector(".foodQ").value = order_amt;
+        if (order_amt > 0) {
+            order_amt--;
+            this.parentElement.querySelector(".foodQ").value = order_amt;
+        }
         return false;
+        
     }
 </script>
