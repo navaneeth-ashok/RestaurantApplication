@@ -26,6 +26,8 @@ namespace RestaurantApplication.Models
         public int NumberOfOccupants { get; set; }
         public DateTime BookingDateTime { get; set; }
         public BookingStatus Status { get; set; }
+        public string PhoneNumber { get; set; }
+        public string EMailID { get; set; }
     }
 
     public enum BookingStatus
