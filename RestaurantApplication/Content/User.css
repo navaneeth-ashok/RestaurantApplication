@@ -59,7 +59,7 @@ body {
 
 .orderButtons {
     width: 230px;
-    padding-top: 40px;
+    padding-top: 10px;
 }
 
 .navbar-brand-centered {
@@ -110,13 +110,15 @@ h2{
 }
 
 .orderBar {
-    background-color: rgba(0, 0, 0, 0.9);
-    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
     padding: 28px;
+    position: sticky;
+    top:0;
+    height:max-content;
 }
 
 .menu{
-    max-width: 60%;
+    max-width: 100%;
 }
 
 .fixed-top-offset{
@@ -146,6 +148,44 @@ h2{
     color: red;
     font-weight: bolder;
     display: none;
+}
+
+.orderPreview td{
+    color: antiquewhite;
+    text-align:center;
+    text-transform: lowercase;
+}
+.orderPreview th {
+    color: navajowhite;
+    text-align: center;
+}
+
+.order-Navigator{
+    /*display:none;*/
+    position:fixed;
+    top: 90vh;
+    right: 20px;
+    display:none;
+}
+
+.orderBtn{
+    display: inline-block;
+    width:fit-content();
+}
+
+@media only screen and (max-width: 992px) {
+    .totalAmount{
+        text-align:center;
+        display: block;
+        margin: 0 auto;
+    }
+    .orderBtn{
+        margin: 0 auto;
+        padding-top: 40px;
+        text-align: center;
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-width: 768px) {
