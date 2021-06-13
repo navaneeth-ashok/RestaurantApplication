@@ -35,7 +35,7 @@ namespace RestaurantApplication.Controllers
             decimal amount = 0;
             foreach( var item in orderItems)
             {
-                System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.FoodPrice);
+                System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.SoldPrice);
                 amount += item.Quantity * item.SoldPrice;
             }
 

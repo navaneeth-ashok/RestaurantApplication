@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_UserPage.cshtml";
 }
 
 <h2>Order Details</h2>
@@ -34,15 +35,67 @@
             @Html.DisplayFor(model => model.OrderIDClassDetails.Status)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalOrderAmount)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.TotalOrderAmount)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TotalOrderAmount)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TotalOrderAmount)
+            </dd>*@
+        @{ foreach (var item in Model.OrderItemDetails)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.FoodPrice + " " + item.Quantity + " " + item.FoodPrice * item.Quantity);
+            }
+        }
+
+
 
     </dl>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.Encode("Item")
+                </th>
+                <th>
+                    @Html.Encode("Price")
+                </th>
+                <th>
+                    @Html.Encode("Quantity")
+                </th>
+                <th>
+                    @Html.Encode("Price")
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.OrderItemDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.FoodName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoldPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.Encode(item.SoldPrice * item.Quantity)
+                </td>
+            </tr>
+        }
+        <tfoot>
+        <td></td>
+        <td></td>
+        <td>@Html.Encode("Total")</td>
+        <td>@Html.DisplayFor(model => model.TotalOrderAmount)</td>
+        </tfoot>
+
+    </table>
+    @*@Html.DisplayNameFor(model => model.TotalOrderAmount)
+        @Html.DisplayFor(model => model.TotalOrderAmount)*@
 </div>
 <p>
     @Html.ActionLink("Order More", "List", new { controller = "Food" })

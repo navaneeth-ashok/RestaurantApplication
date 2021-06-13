@@ -8,50 +8,64 @@
 @{
     int food_id = 0;
 }
-<form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();">
-    @foreach (var food in Model)
-    {
-        <div class="orderList container">
+<div class="ms-auto me-auto menu">
+        <form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();" class="container">
             <div class="row">
-                <div class="orderDetail col-md-8">
-                    <h3>@food.FoodName</h3>
-                    <div>@food.FoodDescription</div>
-                    <p id="foodPrice_@food_id" class="foodPrice">$@food.OfferPrice</p>
-                    <div>
-                        @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
-                        {
-                            <span>&#9733;</span>
-                        }
+                <div class="col-sm-8 menu-list">
+                    @foreach (var food in Model)
+                    {
+                        <div class="orderList container">
+                            <div class="row">
+                                <div class="orderDetail col-lg-10">
+                                    <h3 class="foodName">@food.FoodName</h3>
+                                    <div>@food.FoodDescription</div>
+                                    <p id="foodPrice_@food_id" class="foodPrice">$@food.OfferPrice</p>
+                                    <div>
+                                        @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
+                                        {
+                                            <span>&#9733;</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="menu-form orderAction col-md-4">
+                                    <input type="hidden" name="foodID" value="@food.FoodID">
+                                    <div class="orderButtons ms-auto">
+                                        <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove"><span class="orderButtonText">-</span></button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /><button id="add_@food_id" class="btn btn-success food_add"><span class="orderButtonText">+</span></button>
+                                    </div>
+                                    @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        food_id++;
+                    }
+                </div>
+                <div class="orderBar col-lg-4" id="orderBar">
+                    <div class="container">
+                        <div class="row">
+                            <div id="orderWarning">Oops!!! There is nothing in your cart. Add an item to continue.</div>
+                            <div class="col mainOrderButton">
+                                <table class="table orderPreview table-borderless" id="orderPreviewTable">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Order</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <hr/>
+                                <div class="totalAmount">Total: <span id="totalAmt"></span>$</div>
+                                <div class="orderBtn"><input type="submit" value="Order" class="btn btn-primary" /></div>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="menu-form orderAction col-md-4">
-                    <input type="hidden" name="foodID" value="@food.FoodID">
-                    <div class="orderButtons ms-auto">
-                        <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove"><span class="orderButtonText">-</span></button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /><button id="add_@food_id" class="btn btn-success food_add"><span class="orderButtonText">+</span></button>
-                    </div>
-                    @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
-                </div>
             </div>
-        </div>
-        <hr />
-        food_id++;
-    }
-<div class="orderBar fixed-bottom container-fluid">
-    <div class="container">
-        <div class="row">
-            <div id="orderWarning">Oops!!! There is nothing in your cart. Add an item to continue.</div>
-            <div class="col mainOrderButton">
-                <div class="totalAmount">Total: <span id="totalAmt"></span>$</div>
-                <input type="submit" value="Order!" class="btn btn-primary " />
-            </div>
-        </div>
-    </div>
-    
-    
-    
+        </form>
+    <a href="#orderBar" class="btn btn-primary order-Navigator" id="orderNavigator">Order</a>
 </div>
-
-</form>
 
 
 
@@ -66,9 +80,22 @@
         for (element of remove_buttons) {
             element.onclick = removeFood;
         }
+        // show the navigator
+        if (window.innerWidth < 992) {
+            document.getElementById('orderNavigator').style.display = 'block';
+        }
         calculateAmount();
-
     }
+
+    // function to show/hide the helper button
+    document.onscroll = function () {
+        if (window.innerHeight + window.scrollY > document.body.clientHeight) {
+            document.getElementById('orderNavigator').style.display = 'none';
+        } else if (window.innerWidth < 992) {
+            document.getElementById('orderNavigator').style.display = 'block';
+        }
+    }
+
     function addFood() {
         if (document.getElementById("orderWarning").style.display == "block") {
             document.getElementById("orderWarning").style.display = "none";
@@ -90,16 +117,45 @@
 
     }
 
+    // Calculate the total and preview the order Summary
     function calculateAmount() {
+        //renderOrderList();
         let orderList = document.getElementsByClassName("orderList");
+        let previewTable = document.getElementById("orderPreviewTable");
+        // remove exisitng summary
+        previewTable.querySelector("tbody").innerHTML = "";
         let totalAmount = 0;
         for (order of orderList) {
-            console.log(order.querySelector(".foodPrice").textContent)
-            console.log(order.querySelector(".foodQ").value)
+            //console.log(order.querySelector(".foodPrice").textContent)
+            //console.log(order.querySelector(".foodQ").value)
             totalAmount += parseFloat(order.querySelector(".foodPrice").textContent.replace('$','')) * parseInt(order.querySelector(".foodQ").value);
-            console.log(totalAmount);
+            //console.log(totalAmount);
+            orderQuantity = parseInt(order.querySelector(".foodQ").value);
+            if (orderQuantity > 0) {
+                let row = previewTable.querySelector("tbody").insertRow();
+                row.insertCell(0).innerHTML = order.querySelector(".foodName").textContent;
+                row.insertCell(1).innerHTML = orderQuantity;
+            }
         }
         document.getElementById("totalAmt").innerHTML = totalAmount;
+    }
+
+    function renderOrderList() {
+        let orderList = document.getElementsByClassName("orderList");
+        let previewTable = document.getElementById("orderPreviewTable");
+        // removing existing content
+        previewTable.querySelector("tbody").innerHTML = "";
+        for (order of orderList) {
+            console.log(order.querySelector(".foodName").textContent);
+            console.log(order.querySelector(".foodQ").value);
+            orderQuantity = parseInt(order.querySelector(".foodQ").value);
+            if (orderQuantity > 0) {
+                let row = previewTable.insertRow();
+                row.insertCell(0).innerHTML = order.querySelector(".foodName").textContent;
+                row.insertCell(1).innerHTML = orderQuantity;
+            } 
+        }
+        return false;
     }
 
     function validateEmptyOrder() {
