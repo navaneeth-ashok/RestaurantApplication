@@ -69,7 +69,7 @@ namespace RestaurantApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BookingID,TableNumber,NumberOfOccupants,Allergies,BookingDateTime,UserID,EmailID,PhoneNumber")] Booking booking)
+        public ActionResult Create([Bind(Include = "BookingID,TableNumber,NumberOfOccupants,Allergies,BookingDateTime,UserID,EmailID,PhoneNumber,BookingName")] Booking booking)
         {
             if (ModelState.IsValid)
             {

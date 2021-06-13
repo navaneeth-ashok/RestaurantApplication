@@ -311,6 +311,14 @@
     <Compile Include="Migrations\202106131212194_BookingEmailPhoneNumber.Designer.cs">
       <DependentUpon>202106131212194_BookingEmailPhoneNumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106131329325_BookingName.cs" />
+    <Compile Include="Migrations\202106131329325_BookingName.Designer.cs">
+      <DependentUpon>202106131329325_BookingName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106131655173_BookingName1.cs" />
+    <Compile Include="Migrations\202106131655173_BookingName1.Designer.cs">
+      <DependentUpon>202106131655173_BookingName1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -510,6 +518,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106131212194_BookingEmailPhoneNumber.resx">
       <DependentUpon>202106131212194_BookingEmailPhoneNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106131329325_BookingName.resx">
+      <DependentUpon>202106131329325_BookingName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106131655173_BookingName1.resx">
+      <DependentUpon>202106131655173_BookingName1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

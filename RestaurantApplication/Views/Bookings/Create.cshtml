@@ -9,6 +9,8 @@
 
 
 <link rel="stylesheet" href="~/Content/booking.css">
+
+
 <h2>Book a Table</h2>
 
 <div class="tableBooking ms-auto me-auto">
@@ -17,73 +19,83 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+        <div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @* Sending the default table number as 0, The staff can edit if required *@
-            <input type="hidden" name="TableNumber" value="0">
-        </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @* Sending the default table number as 0, The staff can edit if required *@
+                <input type="hidden" name="TableNumber" value="0">
+            </div>
 
-        <div class="form-group">
-            @Html.Label("Number of Guests", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md">
-                @Html.EditorFor(model => model.NumberOfOccupants, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumberOfOccupants, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md">
+                    @Html.EditorFor(model => model.BookingName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BookingName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Number of Guests", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md">
+                    @Html.EditorFor(model => model.NumberOfOccupants, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumberOfOccupants, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="slidecontainer">
+                <input type="range" min="1" max="10" value="2" class="slider" id="peopleSlider">
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Date Time", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md">
+                    @*@Html.EditorFor(model => model.BookingDateTime, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.BookingDateTime, "", new { @class = "text-danger" })
+                    <input class="form-control text-box single-line" data-val="true" data-val-date="The Booking date and time must be a date." data-val-required="The Booking date and time is required." id="BookingDateTime" name="BookingDateTime" type="datetime-local" value="">
+                </div>
+            </div>
+
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md">
+                        @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.Label("Email ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md">
+                    @Html.EditorFor(model => model.EMailID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EMailID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Allergies, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md">
+                    @Html.EditorFor(model => model.Allergies, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Allergies, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md">
+                    <input type="submit" value="Book a Table" class="btn btn-primary" />
+                </div>
             </div>
         </div>
-
-        <div class="slidecontainer">
-            <input type="range" min="1" max="10" value="2" class="slider" id="peopleSlider">
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Date Time", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md">
-                @Html.EditorFor(model => model.BookingDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BookingDateTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md">
-                @Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            @Html.Label("Email ID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md">
-                @Html.EditorFor(model => model.EMailID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EMailID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md">
-                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Allergies, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md">
-                @Html.EditorFor(model => model.Allergies, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Allergies, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md">
-                <input type="submit" value="Book a Table" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
     }
 
 </div>
@@ -97,5 +109,6 @@
     slider.oninput = function () {
         output.value = this.value;
     }
+
 </script>
 

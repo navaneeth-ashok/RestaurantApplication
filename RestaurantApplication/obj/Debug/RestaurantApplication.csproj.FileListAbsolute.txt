@@ -141,3 +141,5 @@ C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingStatus1.resources
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingStatus2.resources
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingEmailPhoneNumber.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingName.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingName1.resources
