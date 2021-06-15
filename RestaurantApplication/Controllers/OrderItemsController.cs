@@ -166,7 +166,7 @@ namespace RestaurantApplication.Controllers
             // Server Validation to prevent orders with no item from being placed
             var orderFlag = 0;
 
-
+            decimal amount = 0;
             // iterate over the foodList and quantityList, fetch the food details
             foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
             {
@@ -187,9 +187,17 @@ namespace RestaurantApplication.Controllers
                     db.SaveChanges();
                     // for order verification
                     orderFlag++;
+
+                    // amount calculation
+                    amount += newOrderItem.Quantity * newOrderItem.SoldPrice; 
                 }
                 
             }
+
+
+            db.OrderIDs.Attach(newOrder);
+            newOrder.TotalAmount = amount;
+            db.SaveChanges();
 
             if(orderFlag == 0)
             {
