@@ -32,12 +32,13 @@ namespace RestaurantApplication.Controllers
             int orderIDToCheck = (int)id;
             List<OrderItem> orderItems = db.OrdersItems.Where(o => o.OrderID.OrderIDNumber == orderIDToCheck).ToList();
             // debug code
-            decimal amount = 0;
-            foreach( var item in orderItems)
-            {
-                System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.SoldPrice);
-                amount += item.Quantity * item.SoldPrice;
-            }
+            // Amount price is calculated on Order Now, this code should be removed
+            decimal amount = orderID.TotalAmount;
+            //foreach( var item in orderItems)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.SoldPrice);
+            //    amount += item.Quantity * item.SoldPrice;
+            //}
 
             OrderStatusFoodDetail orderStatusFoodDetail = new OrderStatusFoodDetail
             {
@@ -45,6 +46,8 @@ namespace RestaurantApplication.Controllers
                 OrderItemDetails = orderItems,
                 TotalOrderAmount = amount
             };
+
+            // adding TotalAmount to the 
 
             if (orderID == null)
             {

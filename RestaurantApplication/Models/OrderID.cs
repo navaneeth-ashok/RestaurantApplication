@@ -13,6 +13,8 @@ namespace RestaurantApplication.Models
         public DateTime OrderIDTime { get; set; }
         public OrderStatus Status { get; set; }
 
+        public decimal TotalAmount { get; set; }
+
     }
 
     public enum OrderStatus

@@ -52,6 +52,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Razorpay, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Razorpay.3.0.0\lib\net45\Razorpay.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -196,6 +199,7 @@
     <Compile Include="Controllers\OrderIDsDataController.cs" />
     <Compile Include="Controllers\OrderItemsController.cs" />
     <Compile Include="Controllers\OrderItemsDataController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -319,6 +323,18 @@
     <Compile Include="Migrations\202106131655173_BookingName1.Designer.cs">
       <DependentUpon>202106131655173_BookingName1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106141643567_RemoveBookingIDPK.cs" />
+    <Compile Include="Migrations\202106141643567_RemoveBookingIDPK.Designer.cs">
+      <DependentUpon>202106141643567_RemoveBookingIDPK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106141648409_BookingIDNULL.cs" />
+    <Compile Include="Migrations\202106141648409_BookingIDNULL.Designer.cs">
+      <DependentUpon>202106141648409_BookingIDNULL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106150800257_TotalAMTOrder.cs" />
+    <Compile Include="Migrations\202106150800257_TotalAMTOrder.Designer.cs">
+      <DependentUpon>202106150800257_TotalAMTOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -327,8 +343,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderID.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\PaymentDetail.cs" />
     <Compile Include="Models\ViewModel\BookingIDFoodMenu.cs" />
     <Compile Include="Models\ViewModel\OrderStatusFoodDetail.cs" />
+    <Compile Include="Models\ViewModel\PaymentOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -417,6 +435,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Food\ListNew.cshtml" />
     <Content Include="Views\Shared\_UserPage.cshtml" />
+    <Content Include="Views\Payment\Success.cshtml" />
+    <Content Include="Views\Payment\Failed.cshtml" />
+    <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Payment\PaymentPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -437,6 +459,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202105240451520_InitialCreate.resx">
       <DependentUpon>202105240451520_InitialCreate.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105240545534_EmployeeType.resx">
       <DependentUpon>202105240545534_EmployeeType.cs</DependentUpon>
@@ -524,6 +547,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106131655173_BookingName1.resx">
       <DependentUpon>202106131655173_BookingName1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106141643567_RemoveBookingIDPK.resx">
+      <DependentUpon>202106141643567_RemoveBookingIDPK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106141648409_BookingIDNULL.resx">
+      <DependentUpon>202106141648409_BookingIDNULL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106150800257_TotalAMTOrder.resx">
+      <DependentUpon>202106150800257_TotalAMTOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

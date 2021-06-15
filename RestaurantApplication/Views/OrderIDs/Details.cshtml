@@ -87,10 +87,13 @@
             </tr>
         }
         <tfoot>
-        <td></td>
-        <td></td>
-        <td>@Html.Encode("Total")</td>
-        <td>@Html.DisplayFor(model => model.TotalOrderAmount)</td>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>@Html.Encode("Total")</td>
+                <td>@Html.DisplayFor(model => model.TotalOrderAmount)</td>
+            </tr>
+
         </tfoot>
 
     </table>
@@ -100,3 +103,10 @@
 <p>
     @Html.ActionLink("Order More", "List", new { controller = "Food" })
 </p>
+
+<div>
+    <form method="POST" action="/Payment/Index">
+        <input type="hidden" name="OrderID" value="@Model.OrderIDClassDetails.OrderIDNumber">
+        <input type="submit" class="btn btn-warning" value="Pay"/>
+    </form>
+</div>

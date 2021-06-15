@@ -1,0 +1,53 @@
+﻿@model RestaurantApplication.Models.PaymentDetail
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserPage.cshtml";
+}
+<link rel="stylesheet" href="~/Content/booking.css">
+<h2>Payment</h2>
+
+<div class="container login-container tableBooking ms-auto me-auto">
+    <div class="login-card">
+        <div class="login-card-body">
+            @using (Html.BeginForm("CreateOrder", "Payment", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.Label("name", "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md">
+                        @Html.TextBoxFor(x => x.name, new { @class = "form-control", @Value = Model.name })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("email", "Email ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md">
+                        @Html.TextBoxFor(x => x.email, new { @class = "form-control", @Value = Model.email })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.Label("contactNumber", "Phone Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md">
+                        @Html.TextBoxFor(x => x.contactNumber, new { @class = "form-control", @Value = Model.contactNumber })
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    @Html.Label("address", "Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md">
+                        @Html.TextBoxFor(x => x.address, new { @class = "form-control", @Value = Model.address })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("amt", "Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md amt-badge ms-auto me-auto">
+                        <span>$@Model.amount</span>
+                    </div>
+                </div>
+                <input type="hidden" id="amount" name="amount" value="@Model.amount">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            }
+        </div>
+    </div>
+</div>

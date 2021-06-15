@@ -102,13 +102,19 @@ namespace RestaurantApplication.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookingID,TableNumber,NumberOfOccupants,Allergies,BookingDateTime,UserID,Status,Email,PhoneNumber")] Booking booking)
+        public ActionResult Edit([Bind(Include = "BookingID,TableNumber,NumberOfOccupants,Allergies,BookingDateTime,UserID,Status,EmailID,PhoneNumber,BookingName")] Booking booking)
         {
+
             if (ModelState.IsValid)
             {
+                System.Diagnostics.Debug.WriteLine("ModelState Valid");
                 db.Entry(booking).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            } 
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("ModelState Invalid");
             }
             return View(booking);
         }
