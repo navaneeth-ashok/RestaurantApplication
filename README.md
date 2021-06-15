@@ -57,3 +57,7 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 ## Known Bugs
 
 ~~BookingDateTime shows 01-01-0001 00:00:00 after the customer books the table~~
+
+## Updates
+
+-- 15-06-2021 : Admin modules are reachable through /Admin link, Manage options removed from User facing Layout
