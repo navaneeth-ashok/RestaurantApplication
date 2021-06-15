@@ -319,6 +319,14 @@
     <Compile Include="Migrations\202106131655173_BookingName1.Designer.cs">
       <DependentUpon>202106131655173_BookingName1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106141643567_RemoveBookingIDPK.cs" />
+    <Compile Include="Migrations\202106141643567_RemoveBookingIDPK.Designer.cs">
+      <DependentUpon>202106141643567_RemoveBookingIDPK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106141648409_BookingIDNULL.cs" />
+    <Compile Include="Migrations\202106141648409_BookingIDNULL.Designer.cs">
+      <DependentUpon>202106141648409_BookingIDNULL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -524,6 +532,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106131655173_BookingName1.resx">
       <DependentUpon>202106131655173_BookingName1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106141643567_RemoveBookingIDPK.resx">
+      <DependentUpon>202106141643567_RemoveBookingIDPK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106141648409_BookingIDNULL.resx">
+      <DependentUpon>202106141648409_BookingIDNULL.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -157,11 +157,15 @@ namespace RestaurantApplication.Controllers
             // fetch food details -> price, soldprice / offerprice etc
 
             // Booking id default Setting
-            int bookingIDNew = 1;
-            if(bookingID != null)
-            {
-                bookingIDNew = (int)bookingID;
-            }
+            //int bookingIDNew = 1;
+            //if(bookingID != null)
+            //{
+            //    bookingIDNew = (int)bookingID;
+            //}
+
+            // Server Validation to prevent orders with no item from being placed
+            var orderFlag = 0;
+
 
             // iterate over the foodList and quantityList, fetch the food details
             foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
@@ -173,7 +177,7 @@ namespace RestaurantApplication.Controllers
                     OrderItem newOrderItem = new OrderItem
                     {
                         FoodID = food.FoodID,
-                        BookingID = bookingIDNew, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
+                        BookingID = bookingID, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
                         Quantity = Convert.ToInt32(fd.Item2),
                         FoodPrice = food.FoodPrice,
                         SoldPrice = food.OfferPrice,
@@ -181,11 +185,21 @@ namespace RestaurantApplication.Controllers
                     };
                     db.OrdersItems.Add(newOrderItem);
                     db.SaveChanges();
+                    // for order verification
+                    orderFlag++;
                 }
                 
             }
 
-            return RedirectToAction("/Details/" + newOrder.OrderIDNumber, "OrderIDs");
+            if(orderFlag == 0)
+            {
+                return RedirectToAction("List", "Food");
+            } else
+            {
+                return RedirectToAction("/Details/" + newOrder.OrderIDNumber, "OrderIDs");
+            }
+
+            
 
 
 
