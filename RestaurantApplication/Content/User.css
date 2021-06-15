@@ -173,6 +173,16 @@ h2{
     width:fit-content();
 }
 
+#payButton{
+    text-align:center;
+}
+
+.orderMore{
+    text-align:center;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
 @media only screen and (max-width: 992px) {
     .totalAmount{
         text-align:center;
