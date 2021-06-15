@@ -62,3 +62,24 @@ input {
     color:white;
     margin-bottom: 30px;
 }
+
+.bookingStatus {
+    text-align:center;
+    background-color: rgb(0 0 0 / 0.7);
+    max-width: 300px;
+    padding-bottom:50px;
+}
+
+.bookingStatus dt {
+    color: grey;
+    padding-top: 10px;
+}
+
+/*.orderBtnBooking{
+    margin: 0 auto;
+    text-align:center;
+}*/
+
+.OrderForm{
+    text-align:center;
+}
