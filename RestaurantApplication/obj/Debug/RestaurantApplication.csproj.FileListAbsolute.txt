@@ -147,3 +147,6 @@ C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.BookingIDNULL.resources
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\bin\Razorpay.dll
 C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.TotalAMTOrder.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.FoodTypes.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.FoodTypeID.resources
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.Migrations.FoodTypeID1.resources

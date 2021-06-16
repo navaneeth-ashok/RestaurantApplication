@@ -29,7 +29,9 @@ namespace RestaurantApplication.Controllers
                 FoodName = f.FoodName,
                 FoodDescription = f.FoodDescription,
                 OfferPrice = f.OfferPrice,
-                FoodReviewStar = f.FoodReviewStar
+                FoodReviewStar = f.FoodReviewStar,
+                FoodTypeID = f.FoodTypeID,
+                FoodType = f.FoodType
             }));
             return FoodDtos;
         }

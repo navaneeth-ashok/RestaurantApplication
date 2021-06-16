@@ -127,12 +127,17 @@ h2{
     background-color: rgba(0, 0, 0, 0.2);
     padding: 28px;
     position: sticky;
-    top:0;
+    top:100px;
     height:max-content;
+    
 }
 
 .menu{
     max-width: 100%;
+}
+
+.menu-list{
+    padding-top: 50px;
 }
 
 .fixed-top-offset{
@@ -195,6 +200,22 @@ h2{
     text-align:center;
     margin: 0 auto;
     margin-bottom: 30px;
+}
+
+.filter-btn{
+    border:none;
+    background:none;
+    color:antiquewhite;
+}
+
+h2.sticky-top.filter{
+    padding-top: 10px;
+    margin: 0;
+}
+
+.sticky-top.filter {
+    background-color: #131313f7;
+    padding: 20px 0px 20px 0px;
 }
 
 @media only screen and (max-width: 992px) {

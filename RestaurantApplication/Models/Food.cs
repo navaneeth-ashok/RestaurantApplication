@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RestaurantApplication.Models
 {
@@ -19,6 +20,10 @@ namespace RestaurantApplication.Models
         public int OrderCount { get; set; }
 
         public double FoodReviewStar { get; set; }
+
+        [ForeignKey("FoodType")]
+        public int? FoodTypeID { get; set; }
+        public virtual FoodType FoodType { get; set; }
     }
 
     public class FoodDto
@@ -28,5 +33,8 @@ namespace RestaurantApplication.Models
         public string FoodDescription { get; set; }
         public decimal OfferPrice { get; set; }
         public double FoodReviewStar { get; set; }
+        [ForeignKey("FoodType")]
+        public int? FoodTypeID { get; set; }
+        public virtual FoodType FoodType { get; set; }
     }
 }

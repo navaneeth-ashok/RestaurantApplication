@@ -50,7 +50,7 @@ namespace RestaurantApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar")] Food food)
+        public ActionResult Create([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar,FoodTypeID")] Food food)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace RestaurantApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar")] Food food)
+        public ActionResult Edit([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar,FoodTypeID")] Food food)
         {
             if (ModelState.IsValid)
             {
