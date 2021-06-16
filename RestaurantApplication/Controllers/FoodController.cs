@@ -23,10 +23,12 @@ namespace RestaurantApplication.Controllers
         public ActionResult List()
         {
             //retrieve the list of food items
-            string url = "FoodData/ListFoods";
-            HttpResponseMessage response = client.GetAsync(url).Result;
+            //string url = "FoodData/ListFoods";
+            //HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<FoodDto> foods = response.Content.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            //IEnumerable<FoodDto> foods = response.Content.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            FoodDataController foodDataController = new FoodDataController();
+            IEnumerable<FoodDto> foods = foodDataController.ListFoods();
             return View(foods);
         }
 
@@ -34,10 +36,13 @@ namespace RestaurantApplication.Controllers
         public ActionResult ListNew(int bookingId)
         {
             // retrieve the list of food items
-            string url = "FoodData/ListFoods";
-            HttpResponseMessage response = client.GetAsync(url).Result;
+            //string url = "FoodData/ListFoods";
+            //HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<FoodDto> foods = response.Content.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            //IEnumerable<FoodDto> foods = response.Content.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+
+            FoodDataController foodDataController = new FoodDataController();
+            IEnumerable<FoodDto> foods = foodDataController.ListFoods();
 
             BookingIDFoodMenu foodsMenu = new BookingIDFoodMenu
             {

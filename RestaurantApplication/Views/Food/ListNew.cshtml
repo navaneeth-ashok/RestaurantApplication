@@ -9,17 +9,34 @@
     Layout = "~/Views/Shared/_UserPage.cshtml";
 }
 
-<h2>Menu</h2>
-@{
-    int food_id = 0;
-}
+<div class="sticky-top filter">
+    <h2 class="">Menu</h2>
+    @{
+        int food_id = 0;
+        HashSet<string> foodType = new HashSet<string>();
+        foreach (var food in Model.Food)
+        {
+            foodType.Add(food.FoodType.TypeDisplayName);
+        }
+        <div class="ms-auto me-auto text-center" id="itemList">
+            <div class="list-inline">
+                <button class="list-inline-item filter-btn" onclick="filterMenu('All')">All</button>
+                @foreach (string food in foodType)
+                {
+                    <button class="list-inline-item filter-btn" onclick="filterMenu('@food')">@food</button>
+                }
+            </div>
+        </div>
+    }
+</div>
 <div class="ms-auto me-auto menu">
+
     <form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();" class="container">
         <div class="row">
             <div class="col-sm-8 menu-list">
                 @foreach (var food in Model.Food)
                 {
-                    <div class="orderList container">
+                    <div class="orderList container @food.FoodType.TypeDisplayName">
                         <div class="row">
                             <div class="orderDetail col-lg-10">
                                 <h3 class="foodName">@food.FoodName</h3>
@@ -39,9 +56,11 @@
                                 </div>
                                 @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
                             </div>
+
                         </div>
+                        <hr />
                     </div>
-                    <hr />
+
                     food_id++;
                 }
             </div>
@@ -176,4 +195,17 @@
         document.getElementById("orderWarning").style.display = "block";
         return false;
     }
+
+    // menu filtering
+
+    function filterMenu(className) {
+        if (className === 'All') {
+            $('.orderList').show();
+        } else {
+            $('.orderList').hide();
+            $("." + className).toggle();
+        }
+
+    }
+
 </script>
