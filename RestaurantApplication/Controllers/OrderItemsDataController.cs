@@ -17,6 +17,7 @@ namespace RestaurantApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/OrderItemsData
+        [Authorize]
         public IQueryable<OrderItem> GetOrdersItems()
         {
             return db.OrdersItems;
@@ -24,6 +25,7 @@ namespace RestaurantApplication.Controllers
 
         // GET: api/OrderItemsData/5
         [ResponseType(typeof(OrderItem))]
+        [Authorize]
         public IHttpActionResult GetOrderItem(int id)
         {
             OrderItem orderItem = db.OrdersItems.Find(id);
@@ -37,6 +39,7 @@ namespace RestaurantApplication.Controllers
 
         // PUT: api/OrderItemsData/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public IHttpActionResult PutOrderItem(int id, OrderItem orderItem)
         {
             if (!ModelState.IsValid)
@@ -72,6 +75,7 @@ namespace RestaurantApplication.Controllers
 
         // POST: api/OrderItemsData
         [ResponseType(typeof(OrderItem))]
+        [Authorize]
         public IHttpActionResult PostOrderItem(OrderItem orderItem)
         {
             if (!ModelState.IsValid)
@@ -102,6 +106,7 @@ namespace RestaurantApplication.Controllers
 
         // DELETE: api/OrderItemsData/5
         [ResponseType(typeof(OrderItem))]
+        [Authorize]
         public IHttpActionResult DeleteOrderItem(int id)
         {
             OrderItem orderItem = db.OrdersItems.Find(id);

@@ -16,7 +16,9 @@ namespace RestaurantApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
         // GET: api/BookingsData
+        [Authorize]
         public IQueryable<Booking> GetBookings()
         {
             return db.Bookings;
@@ -24,6 +26,7 @@ namespace RestaurantApplication.Controllers
 
         // GET: api/BookingsData/5
         [ResponseType(typeof(Booking))]
+        [Authorize]
         public IHttpActionResult GetBooking(int id)
         {
             Booking booking = db.Bookings.Find(id);
@@ -37,6 +40,7 @@ namespace RestaurantApplication.Controllers
 
         // PUT: api/BookingsData/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public IHttpActionResult PutBooking(int id, Booking booking)
         {
             if (!ModelState.IsValid)
@@ -72,6 +76,7 @@ namespace RestaurantApplication.Controllers
 
         // POST: api/BookingsData
         [ResponseType(typeof(Booking))]
+        [Authorize]
         public IHttpActionResult PostBooking(Booking booking)
         {
             if (!ModelState.IsValid)
@@ -87,6 +92,7 @@ namespace RestaurantApplication.Controllers
 
         // DELETE: api/BookingsData/5
         [ResponseType(typeof(Booking))]
+        [Authorize]
         public IHttpActionResult DeleteBooking(int id)
         {
             Booking booking = db.Bookings.Find(id);

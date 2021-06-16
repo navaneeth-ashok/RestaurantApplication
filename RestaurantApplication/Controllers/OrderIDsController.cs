@@ -16,6 +16,7 @@ namespace RestaurantApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: OrderIDs
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.OrderIDs.ToList());
@@ -57,6 +58,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderIDs/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -80,6 +82,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderIDs/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,6 +102,7 @@ namespace RestaurantApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "OrderIDNumber,OrderIDTime,Status")] OrderID orderID)
         {
             if (ModelState.IsValid)
@@ -111,6 +115,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderIDs/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -128,6 +133,7 @@ namespace RestaurantApplication.Controllers
         // POST: OrderIDs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             OrderID orderID = db.OrderIDs.Find(id);
