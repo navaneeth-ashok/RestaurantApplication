@@ -1,0 +1,80 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap');
+
+
+body {
+    background-image: url(../Content/images/homepage.jpg);
+}
+
+.front-banner {
+    /*height:80vh;*/
+}
+
+h1 {
+    font-size: 3em;
+    font-family: 'Viaoda Libre', cursive;
+}
+
+h2 {
+    font-family: 'Viaoda Libre', cursive;
+}
+
+#headingFirst{
+    font-weight:bolder;
+}
+
+.about p{
+    text-align:center;
+}
+
+.about{
+    padding: 0px 40px 0 40px;
+}
+
+.carousel-item{
+    max-height: 400px;
+}
+
+.home-link {
+    background-color: #0d6efd00;
+    border: none;
+    font-size: 1.4em;
+    border-radius: 0px;
+}
+
+.home-link:hover{
+    background-color: rgb(160 159 159 / 0.50)
+}
+
+.navLinks{
+    margin-top: 40px;
+    background-color: rgb(101 101 101 / 0.48);
+    padding: 20px 0px 20px 0px;
+}
+
+#brand{
+    font-size: 2em;
+    color:burlywood;
+}
+
+.navLinks .col {
+    text-align:center;
+}
+
+/*.navbar-brand-centered img{
+    width:200px;
+    transform: translate(-20%,0);
+}*/
+
+@media only screen and (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .about{
+        padding: 0px;
+    }
+
+    .carousel-item {
+        max-height: 200px;
+    }
+}

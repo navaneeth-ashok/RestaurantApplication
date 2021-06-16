@@ -22,6 +22,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Foods/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +38,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Foods/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +49,7 @@ namespace RestaurantApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar")] Food food)
         {
             if (ModelState.IsValid)
@@ -60,6 +63,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Foods/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +83,7 @@ namespace RestaurantApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar")] Food food)
         {
             if (ModelState.IsValid)
@@ -91,6 +96,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Foods/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +114,7 @@ namespace RestaurantApplication.Controllers
         // POST: Foods/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Food food = db.Foods.Find(id);

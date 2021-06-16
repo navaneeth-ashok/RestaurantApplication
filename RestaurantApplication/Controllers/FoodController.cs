@@ -59,12 +59,14 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Food/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Food/Create
+        [Authorize]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -81,12 +83,14 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Food/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
         // POST: Food/Edit/5
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -103,12 +107,14 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Food/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         // POST: Food/Delete/5
+        [Authorize]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

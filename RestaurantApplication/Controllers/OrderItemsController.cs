@@ -15,6 +15,7 @@ namespace RestaurantApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: OrderItems
+        [Authorize]
         public ActionResult Index()
         {
             var ordersItems = db.OrdersItems.Include(o => o.Booking).Include(o => o.Food).Include(o => o.OrderID);
@@ -22,6 +23,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderItems/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderItems/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.BookingID = new SelectList(db.Bookings, "BookingID", "Allergies");
@@ -50,6 +53,7 @@ namespace RestaurantApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "FoodID,BookingID,Quantity,FoodPrice,SoldPrice,OrderIDNumber")] OrderItem orderItem)
         {
             if (ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderItems/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,6 +93,7 @@ namespace RestaurantApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "FoodID,BookingID,Quantity,FoodPrice,SoldPrice,OrderIDNumber")] OrderItem orderItem)
         {
             if (ModelState.IsValid)
@@ -103,6 +109,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderItems/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,6 +127,7 @@ namespace RestaurantApplication.Controllers
         // POST: OrderItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             OrderItem orderItem = db.OrdersItems.Find(id);

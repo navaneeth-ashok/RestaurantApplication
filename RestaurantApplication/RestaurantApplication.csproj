@@ -185,6 +185,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\booking.css" />
     <Content Include="Content\bootstrap5\bootstrap.css" />
+    <Content Include="Content\Home.css" />
+    <Content Include="Content\images\homepage.jpg" />
     <Content Include="Content\images\credits.txt" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />

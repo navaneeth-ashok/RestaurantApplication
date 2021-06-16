@@ -17,6 +17,7 @@ namespace RestaurantApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/OrderIDsData
+        [Authorize]
         public IQueryable<OrderID> GetOrderIDs()
         {
             return db.OrderIDs;
@@ -24,6 +25,7 @@ namespace RestaurantApplication.Controllers
 
         // GET: api/OrderIDsData/5
         [ResponseType(typeof(OrderID))]
+        [Authorize]
         public IHttpActionResult GetOrderID(int id)
         {
             OrderID orderID = db.OrderIDs.Find(id);
@@ -37,6 +39,7 @@ namespace RestaurantApplication.Controllers
 
         // PUT: api/OrderIDsData/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public IHttpActionResult PutOrderID(int id, OrderID orderID)
         {
             if (!ModelState.IsValid)
@@ -72,6 +75,7 @@ namespace RestaurantApplication.Controllers
 
         // POST: api/OrderIDsData
         [ResponseType(typeof(OrderID))]
+        [Authorize]
         public IHttpActionResult PostOrderID(OrderID orderID)
         {
             if (!ModelState.IsValid)
@@ -87,6 +91,7 @@ namespace RestaurantApplication.Controllers
 
         // DELETE: api/OrderIDsData/5
         [ResponseType(typeof(OrderID))]
+        [Authorize]
         public IHttpActionResult DeleteOrderID(int id)
         {
             OrderID orderID = db.OrderIDs.Find(id);

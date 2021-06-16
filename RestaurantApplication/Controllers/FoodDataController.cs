@@ -57,6 +57,7 @@ namespace RestaurantApplication.Controllers
 
         // PUT: api/FoodData/UpdateFood/5
         [ResponseType(typeof(void))]
+        [Authorize]
         [HttpPut]
         public IHttpActionResult UpdateFood(int id, Food food)
         {
@@ -94,6 +95,7 @@ namespace RestaurantApplication.Controllers
         // POST: api/FoodData/AddFood
         [ResponseType(typeof(Food))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult AddFood(Food food)
         {
             if (!ModelState.IsValid)
@@ -110,6 +112,7 @@ namespace RestaurantApplication.Controllers
         // POST: api/FoodData/DeleteAnimal/5
         [ResponseType(typeof(Food))]
         [HttpPost]
+        [Authorize]
         public IHttpActionResult DeleteFood(int id)
         {
             Food food = db.Foods.Find(id);
