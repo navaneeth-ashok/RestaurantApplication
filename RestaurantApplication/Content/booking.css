@@ -1,4 +1,8 @@
-﻿.tableBooking {
+﻿body{
+    background-image: url(../Content/images/booking.jpg)
+}
+
+.tableBooking {
     text-align: center;
 }
 
@@ -19,7 +23,7 @@ input {
     appearance: none;
     width: 100%; /* Full-width */
     height: 10px; /* Specified height */
-    background: #d3d3d3; /* Grey background */
+    background: #d3d3d37a; /* Grey background */
     outline: none; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
@@ -37,7 +41,7 @@ input {
     appearance: none;
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
-    background: #2b50d8; /* Green background */
+    background: #ff6a00; /* Green background */
     cursor: pointer; /* Cursor on hover */
     border: none;
     border-radius: 5px;
@@ -46,7 +50,7 @@ input {
 .slider::-moz-range-thumb {
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
-    background: #2b50d8; /* Green background */
+    background: #ff6a00; /* Green background */
     cursor: pointer; /* Cursor on hover */
     border: none;
     border-radius: 5px;

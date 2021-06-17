@@ -74,4 +74,12 @@
             document.getElementsByClassName('navbar')[0].classList.add("sticky-top");
         }
     }
+
+    window.onscroll = function () {
+        if (document.getElementsByClassName('navLinks')[0].getBoundingClientRect().y === 0) {
+            document.getElementsByClassName('navLinks')[0].classList.add('navlink-dark');
+        } else {
+            document.getElementsByClassName('navLinks')[0].classList.remove('navlink-dark');
+        }
+    }
 </script>

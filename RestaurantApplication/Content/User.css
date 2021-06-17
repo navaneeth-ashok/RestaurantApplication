@@ -55,6 +55,13 @@ body {
 
 .nav-link {
     font-size: 1em;
+    text-decoration: underline transparent;
+    transition: text-decoration 300ms ease-out;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    transition: text-decoration 300ms ease-in;
 }
 
 .orderButtons {
