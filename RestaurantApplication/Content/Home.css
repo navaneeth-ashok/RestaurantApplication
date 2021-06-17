@@ -65,6 +65,46 @@ h2 {
     transform: translate(-20%,0);
 }*/
 
+.location-list {
+    list-style: none;
+}
+
+.location-list li button{
+    background: none;
+    color: inherit;
+    border: none;
+}
+
+.location-list li button:hover {
+    color: #dfa760;
+}
+
+.location-list li button:focus {
+    color: #e19433;
+}
+
+#map {
+    height: 200px;
+    /* The height is 400 pixels */
+    width: 100%;
+}
+
+.social-icons .col {
+    padding: 0;
+}
+
+.social-icons .col > img {
+    background-color: rgb(222 222 222 / 75%);
+    border-radius: 5px;
+    padding: 10px;
+    width: 48px;
+}
+
+.social-icons .col > img:hover {
+    background-color: rgb(255 253 253);
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 480px) {
     h1 {
         font-size: 2em;

@@ -244,6 +244,17 @@ h2.sticky-top.filter{
         width: 100%;
     }
 
+    .location-list li {
+        display: inline-block;
+    }
+
+    .location-list {
+        text-align: center;
+    }
+
+    address{
+        text-align:center;
+    }
 }
 
 @media only screen and (max-width: 768px) {
