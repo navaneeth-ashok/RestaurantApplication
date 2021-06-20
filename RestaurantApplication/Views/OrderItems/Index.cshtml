@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="~/Content/dataTables.min.css" />
+<script src="~/Scripts/dataTables.js"></script>
 <h2>Index</h2>
 
 <p>
@@ -69,7 +69,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { foodId = item.FoodID, orderId = item.OrderID.OrderIDNumber }) |
-                    @Html.ActionLink("Details", "Details", new { foodId=item.FoodID, orderId=item.OrderID.OrderIDNumber }) |
+                    @Html.ActionLink("Details", "Details", new { foodId = item.FoodID, orderId = item.OrderID.OrderIDNumber }) |
                     @Html.ActionLink("Delete", "Delete", new { foodId = item.FoodID, orderId = item.OrderID.OrderIDNumber })
                 </td>
             </tr>

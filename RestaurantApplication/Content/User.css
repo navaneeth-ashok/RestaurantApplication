@@ -231,6 +231,18 @@ h2.sticky-top.filter{
     margin-top: 20px;
 }
 
+.filter-btn:hover {
+    color: #dfa760;
+}
+
+.filter-btn:focus {
+    color: #e19433;
+}
+
+.filter-btn:focus {
+    outline : 0;
+}
+
 
 @media only screen and (max-width: 992px) {
     .totalAmount{
