@@ -55,6 +55,13 @@ body {
 
 .nav-link {
     font-size: 1em;
+    text-decoration: underline transparent;
+    transition: text-decoration 300ms ease-out;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+    transition: text-decoration 300ms ease-in;
 }
 
 .orderButtons {
@@ -127,12 +134,17 @@ h2{
     background-color: rgba(0, 0, 0, 0.2);
     padding: 28px;
     position: sticky;
-    top:0;
+    top:100px;
     height:max-content;
+    
 }
 
 .menu{
     max-width: 100%;
+}
+
+.menu-list{
+    padding-top: 50px;
 }
 
 .fixed-top-offset{
@@ -197,6 +209,29 @@ h2{
     margin-bottom: 30px;
 }
 
+.filter-btn{
+    border:none;
+    background:none;
+    color:antiquewhite;
+}
+
+h2.sticky-top.filter{
+    padding-top: 10px;
+    margin: 0;
+}
+
+.sticky-top.filter {
+    background-color: #131313f7;
+    padding: 20px 0px 20px 0px;
+}
+
+#orderNotification {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
 @media only screen and (max-width: 992px) {
     .totalAmount{
         text-align:center;
@@ -223,6 +258,17 @@ h2{
         width: 100%;
     }
 
+    .location-list li {
+        display: inline-block;
+    }
+
+    .location-list {
+        text-align: center;
+    }
+
+    address{
+        text-align:center;
+    }
 }
 
 @media only screen and (max-width: 768px) {

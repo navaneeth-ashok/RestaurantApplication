@@ -3,67 +3,85 @@
     ViewBag.Title = "Menu";
     Layout = "~/Views/Shared/_UserPage.cshtml";
 }
-
-<h2>Menu</h2>
-@{
-    int food_id = 0;
-}
+<div class="sticky-top filter">
+    <h2 class="">Menu</h2>
+    @{
+        int food_id = 0;
+        HashSet<string> foodType = new HashSet<string>();
+        foreach (var food in Model)
+        {
+            foodType.Add(food.FoodType.TypeDisplayName);
+        }
+        <div class="ms-auto me-auto text-center" id="itemList">
+            <div class="list-inline">
+                <button class="list-inline-item filter-btn" onclick="filterMenu('All')">All</button>
+                @foreach (string food in foodType)
+                {
+                    <button class="list-inline-item filter-btn" onclick="filterMenu('@food')">@food</button>
+                }
+            </div>
+        </div>
+    }
+</div>
 <div class="ms-auto me-auto menu">
-        <form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();" class="container">
-            <div class="row">
-                <div class="col-sm-8 menu-list">
-                    @foreach (var food in Model)
-                    {
-                        <div class="orderList container">
-                            <div class="row">
-                                <div class="orderDetail col-lg-10">
-                                    <h3 class="foodName">@food.FoodName</h3>
-                                    <div>@food.FoodDescription</div>
-                                    <p id="foodPrice_@food_id" class="foodPrice">$@food.OfferPrice</p>
-                                    <div>
-                                        @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
-                                        {
-                                            <span>&#9733;</span>
-                                        }
-                                    </div>
-                                </div>
-                                <div class="menu-form orderAction col-md-4">
-                                    <input type="hidden" name="foodID" value="@food.FoodID">
-                                    <div class="orderButtons ms-auto">
-                                        <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove"><span class="orderButtonText">-</span></button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /><button id="add_@food_id" class="btn btn-success food_add"><span class="orderButtonText">+</span></button>
-                                    </div>
-                                    @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
+
+    <form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();" class="container">
+        <div class="row">
+            <div class="col-sm-8 menu-list">
+                @foreach (var food in Model)
+                {
+                    <div class="orderList container @food.FoodType.TypeDisplayName">
+                        <div class="row">
+                            <div class="orderDetail col-lg-10">
+                                <h3 class="foodName">@food.FoodName</h3>
+                                <div>@food.FoodDescription</div>
+                                <p id="foodPrice_@food_id" class="foodPrice">$@food.OfferPrice</p>
+                                <div>
+                                    @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
+                                    {
+                                        <span>&#9733;</span>
+                                    }
                                 </div>
                             </div>
+                            <div class="menu-form orderAction col-md-4">
+                                <input type="hidden" name="foodID" value="@food.FoodID">
+                                <div class="orderButtons ms-auto">
+                                    <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove"><span class="orderButtonText">-</span></button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /><button id="add_@food_id" class="btn btn-success food_add"><span class="orderButtonText">+</span></button>
+                                </div>
+                                @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
+                            </div>
+
                         </div>
                         <hr />
-                        food_id++;
-                    }
-                </div>
-                <div class="orderBar col-lg-4" id="orderBar">
-                    <div class="container">
-                        <div class="row">
-                            <div id="orderWarning">Oops!!! There is nothing in your cart. Add an item to continue.</div>
-                            <div class="col mainOrderButton">
-                                <table class="table orderPreview table-borderless" id="orderPreviewTable">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Order</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                                <hr/>
-                                <div class="totalAmount">Total: <span id="totalAmt"></span>$</div>
-                                <div class="orderBtn"><input type="submit" value="Order" class="btn btn-primary" /></div>
-                                
-                            </div>
+                    </div>
+
+                    food_id++;
+                }
+            </div>
+            <div class="orderBar col-lg-4" id="orderBar">
+                <div class="container">
+                    <div class="row">
+                        <div id="orderWarning">Oops!!! There is nothing in your cart. Add an item to continue.</div>
+                        <div class="col mainOrderButton">
+                            <table class="table orderPreview table-borderless" id="orderPreviewTable">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Order</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <hr />
+                            <div class="totalAmount">Total: <span id="totalAmt"></span>$</div>
+                            <div class="orderBtn"><input type="submit" value="Order" class="btn btn-primary" /></div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
     <a href="#orderBar" class="btn btn-primary order-Navigator" id="orderNavigator">Order</a>
 </div>
 
@@ -128,7 +146,7 @@
         for (order of orderList) {
             //console.log(order.querySelector(".foodPrice").textContent)
             //console.log(order.querySelector(".foodQ").value)
-            totalAmount += parseFloat(order.querySelector(".foodPrice").textContent.replace('$','')) * parseInt(order.querySelector(".foodQ").value);
+            totalAmount += parseFloat(order.querySelefoodtor(".foodPrice").textContent.replace('$', '')) * parseInt(order.querySelector(".foodQ").value);
             //console.log(totalAmount);
             orderQuantity = parseInt(order.querySelector(".foodQ").value);
             if (orderQuantity > 0) {
@@ -153,7 +171,7 @@
                 let row = previewTable.insertRow();
                 row.insertCell(0).innerHTML = order.querySelector(".foodName").textContent;
                 row.insertCell(1).innerHTML = orderQuantity;
-            } 
+            }
         }
         return false;
     }
@@ -170,4 +188,17 @@
         document.getElementById("orderWarning").style.display = "block";
         return false;
     }
+
+    // menu filtering
+
+    function filterMenu(className) {
+        if (className === 'All') {
+            $('.orderList').show();
+        } else {
+            $('.orderList').hide();
+            $("." + className).toggle();
+        }
+
+    }
+
 </script>

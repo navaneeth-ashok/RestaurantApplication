@@ -39,16 +39,24 @@ h2 {
     border: none;
     font-size: 1.4em;
     border-radius: 0px;
+    transition: background-color 300ms ease-out;
 }
 
 .home-link:hover{
-    background-color: rgb(160 159 159 / 0.50)
+    background-color: rgb(160 159 159 / 0.50);
+    transition: background-color 300ms ease-in;
 }
 
-.navLinks{
+.navLinks {
     margin-top: 40px;
     background-color: rgb(101 101 101 / 0.48);
     padding: 20px 0px 20px 0px;
+    transition: background-color 500ms ease-out;
+}
+
+.navlink-dark {
+    background-color: rgb(31 31 31 / 98%);
+    transition: background-color 500ms ease-in;
 }
 
 #brand{
@@ -64,6 +72,48 @@ h2 {
     width:200px;
     transform: translate(-20%,0);
 }*/
+
+.location-list {
+    list-style: none;
+}
+
+.location-list li button{
+    background: none;
+    color: inherit;
+    border: none;
+}
+
+.location-list li button:hover {
+    color: #dfa760;
+}
+
+.location-list li button:focus {
+    color: #e19433;
+}
+
+#map {
+    height: 200px;
+    /* The height is 400 pixels */
+    width: 100%;
+}
+
+.social-icons .col {
+    padding: 0;
+}
+
+.social-icons .col > img {
+    background-color: rgb(222 222 222 / 75%);
+    border-radius: 5px;
+    padding: 10px;
+    width: 48px;
+    transition: background-color 500ms ease-in;
+}
+
+.social-icons .col > img:hover {
+    background-color: rgb(255 253 253);
+    cursor: pointer;
+    transition: background-color 500ms ease-out;
+}
 
 @media only screen and (max-width: 480px) {
     h1 {

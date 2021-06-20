@@ -10,6 +10,7 @@ namespace RestaurantApplication.Controllers
     {
         // GET: Admin
         // This controller is to serve a one stop view to all the restaurant management actions
+        // The view contains links to all other controller's action which belongs to the Admin User
         [Authorize]
         public ActionResult Index()
         {

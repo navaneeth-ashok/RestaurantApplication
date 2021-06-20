@@ -195,6 +195,8 @@
     <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\FoodDataController.cs" />
     <Compile Include="Controllers\FoodsController.cs" />
+    <Compile Include="Controllers\FoodTypesController.cs" />
+    <Compile Include="Controllers\FoodTypesDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderIDsController.cs" />
@@ -337,16 +339,30 @@
     <Compile Include="Migrations\202106150800257_TotalAMTOrder.Designer.cs">
       <DependentUpon>202106150800257_TotalAMTOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106161129584_FoodTypes.cs" />
+    <Compile Include="Migrations\202106161129584_FoodTypes.Designer.cs">
+      <DependentUpon>202106161129584_FoodTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106161146270_FoodTypeID.cs" />
+    <Compile Include="Migrations\202106161146270_FoodTypeID.Designer.cs">
+      <DependentUpon>202106161146270_FoodTypeID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106161400046_FoodTypeID1.cs" />
+    <Compile Include="Migrations\202106161400046_FoodTypeID1.Designer.cs">
+      <DependentUpon>202106161400046_FoodTypeID1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\Food.cs" />
+    <Compile Include="Models\FoodType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderID.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\PaymentDetail.cs" />
     <Compile Include="Models\ViewModel\BookingIDFoodMenu.cs" />
+    <Compile Include="Models\ViewModel\FoodFoodType.cs" />
     <Compile Include="Models\ViewModel\OrderStatusFoodDetail.cs" />
     <Compile Include="Models\ViewModel\PaymentOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -441,6 +457,12 @@
     <Content Include="Views\Payment\Failed.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Payment\PaymentPage.cshtml" />
+    <Content Include="Views\FoodTypes\Create.cshtml" />
+    <Content Include="Views\FoodTypes\Delete.cshtml" />
+    <Content Include="Views\FoodTypes\Details.cshtml" />
+    <Content Include="Views\FoodTypes\Edit.cshtml" />
+    <Content Include="Views\FoodTypes\Index.cshtml" />
+    <Content Include="Views\Home\Location.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -558,6 +580,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106150800257_TotalAMTOrder.resx">
       <DependentUpon>202106150800257_TotalAMTOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106161129584_FoodTypes.resx">
+      <DependentUpon>202106161129584_FoodTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106161146270_FoodTypeID.resx">
+      <DependentUpon>202106161146270_FoodTypeID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106161400046_FoodTypeID1.resx">
+      <DependentUpon>202106161400046_FoodTypeID1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -39,6 +39,9 @@ namespace RestaurantApplication.Models
 
         // add OrderID to the system
         public DbSet<OrderID> OrderIDs { get; set; }
+
+        // add FoodType to the system
+        public DbSet<FoodType> FoodTypes { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

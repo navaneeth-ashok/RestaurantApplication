@@ -90,8 +90,6 @@
         </tfoot>
 
     </table>
-    @*@Html.DisplayNameFor(model => model.TotalOrderAmount)
-        @Html.DisplayFor(model => model.TotalOrderAmount)*@
 </div>
 <div class="orderMore">
     @Html.ActionLink("Order More", "List", new { controller = "Food" }, new { @class= "btn btn-success" })
@@ -100,6 +98,48 @@
 <div>
     <form method="POST" action="/Payment/Index" id="payButton">
         <input type="hidden" name="OrderID" value="@Model.OrderIDClassDetails.OrderIDNumber">
-        <input type="submit" class="btn btn-warning" value="Pay"/>
+        <input type="submit" class="btn btn-warning" value="Pay" />
     </form>
+    <div class="ms-auto me-auto" id="orderNotification">
+        <p>The order has been updated, please refresh the page or click here to fetch the update. </p>
+        <button class="btn btn-info" id="fetch" onclick="refresh()">Refresh</button>
+    </div>
+    
 </div>
+
+<script>
+    $(document).ready(function () {
+        const interval = setInterval(function () { checkForOrderUpdate() }, 5000);
+    });
+
+    function refresh() {
+        location.reload(true);
+    }
+
+    function checkForOrderUpdate() {
+        var serviceURL = 'api/OrderItemsData/CheckOrderUpdate/?orderID=' + @Model.OrderIDClassDetails.OrderIDNumber +
+                    '&amount=' + @Model.OrderIDClassDetails.TotalAmount;
+        var baseApplicationPath = '@Url.Content("~/")';
+
+        $.ajax({
+            type: "GET",
+            url: baseApplicationPath + serviceURL,
+            data: param = "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: successFunc,
+            error: errorFunc
+        });
+    }
+
+    function successFunc(data, status) {
+        if (data === true) {
+            $('#orderNotification').show();
+        }
+    }
+
+    function errorFunc() {
+        console.log('Error checking for updated order status');
+    }
+
+</script>

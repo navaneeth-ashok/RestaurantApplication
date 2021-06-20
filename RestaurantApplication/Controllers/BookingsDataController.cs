@@ -17,14 +17,16 @@ namespace RestaurantApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
-        // GET: api/BookingsData
+        // GET: api/BookingsData/GetBookings
         [Authorize]
-        public IQueryable<Booking> GetBookings()
+        public IEnumerable<Booking> GetBookings()
         {
-            return db.Bookings;
+            List<Booking> bookings = db.Bookings.ToList();
+            
+            return bookings;
         }
 
-        // GET: api/BookingsData/5
+        // GET: api/BookingsData/GetBooking/5
         [ResponseType(typeof(Booking))]
         [Authorize]
         public IHttpActionResult GetBooking(int id)
@@ -38,10 +40,35 @@ namespace RestaurantApplication.Controllers
             return Ok(booking);
         }
 
-        // PUT: api/BookingsData/5
+        // GET: api/BookingsData/ViewBooking/5
+        // This is public facing API
+        // This can be used by non logged-in guests to view the status of their booking
+        // In this view all the personal and sensitive information about the booking is hidden
+        [HttpGet]
+        [ResponseType(typeof(Booking))]
+        public IHttpActionResult ViewBooking(int id)
+        {
+            Booking booking = db.Bookings.Find(id);
+            if (booking == null)
+            {
+                return NotFound();
+            }
+            BookingDto bookingDetail = new BookingDto
+            {
+                BookingID = booking.BookingID,
+                Status = booking.Status,
+                NumberOfOccupants = booking.NumberOfOccupants,
+                BookingDateTime = booking.BookingDateTime
+            };
+
+            return Ok(bookingDetail);
+        }
+
+        // POST: api/BookingsData/EditBooking/5
         [ResponseType(typeof(void))]
         [Authorize]
-        public IHttpActionResult PutBooking(int id, Booking booking)
+        [HttpPost]
+        public IHttpActionResult EditBooking(int id, Booking booking)
         {
             if (!ModelState.IsValid)
             {
@@ -74,10 +101,11 @@ namespace RestaurantApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/BookingsData
+        // POST: api/BookingsData/CreateBooking
         [ResponseType(typeof(Booking))]
         [Authorize]
-        public IHttpActionResult PostBooking(Booking booking)
+        [HttpPost]
+        public IHttpActionResult CreateBooking(Booking booking)
         {
             if (!ModelState.IsValid)
             {
@@ -90,9 +118,10 @@ namespace RestaurantApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = booking.BookingID }, booking);
         }
 
-        // DELETE: api/BookingsData/5
+        // POST: api/BookingsData/DeleteBooking/5
         [ResponseType(typeof(Booking))]
         [Authorize]
+        [HttpPost]
         public IHttpActionResult DeleteBooking(int id)
         {
             Booking booking = db.Bookings.Find(id);
@@ -100,9 +129,24 @@ namespace RestaurantApplication.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                db.Bookings.Remove(booking);
+                db.SaveChanges();
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException ex) /* when (((System.Data.SqlClient.SqlException)ex.InnerException).Number== 547)*/
+            {
+                // Exception to handle delete if the key is referenced somewhere else
+                // Fix : Ondelete cascade
+                //var q = ex.InnerException as System.Data.SqlClient.SqlException;
+                //var ErrorCode = q.Number;
 
-            db.Bookings.Remove(booking);
-            db.SaveChanges();
+                string message = ex.InnerException == null ? "" : ex.InnerException.Message;
+                System.Diagnostics.Debug.WriteLine("Cannot delete booking, as an order is associated with it");
+                System.Diagnostics.Debug.WriteLine(message);
+               
+            }
+          
 
             return Ok(booking);
         }

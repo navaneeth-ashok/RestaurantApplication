@@ -18,17 +18,19 @@ namespace RestaurantApplication.Controllers
 
         // GET: api/OrderItemsData
         [Authorize]
-        public IQueryable<OrderItem> GetOrdersItems()
+        [HttpGet]
+        public IEnumerable<OrderItem> GetOrdersItems()
         {
+            List<OrderItem> orderItems = db.OrdersItems.Include(o => o.Booking).Include(o => o.Food).Include(o => o.OrderID).ToList();
             return db.OrdersItems;
         }
 
-        // GET: api/OrderItemsData/5
+        // GET: api/OrderItemsData/GetOrderItem/5
         [ResponseType(typeof(OrderItem))]
-        [Authorize]
-        public IHttpActionResult GetOrderItem(int id)
+        [HttpGet]
+        public IHttpActionResult GetOrderItem(int foodId, int orderId)
         {
-            OrderItem orderItem = db.OrdersItems.Find(id);
+            OrderItem orderItem = db.OrdersItems.Find(foodId, orderId);
             if (orderItem == null)
             {
                 return NotFound();
@@ -37,17 +39,18 @@ namespace RestaurantApplication.Controllers
             return Ok(orderItem);
         }
 
-        // PUT: api/OrderItemsData/5
+        // Post: api/OrderItemsData/5
         [ResponseType(typeof(void))]
         [Authorize]
-        public IHttpActionResult PutOrderItem(int id, OrderItem orderItem)
+        [HttpPost]
+        public IHttpActionResult UpdateOrderItem(int foodId, int orderId, OrderItem orderItem)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != orderItem.FoodID)
+            if (foodId != orderItem.FoodID || orderId != orderItem.OrderIDNumber)
             {
                 return BadRequest();
             }
@@ -60,7 +63,7 @@ namespace RestaurantApplication.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderItemExists(id))
+                if (!OrderItemExists(orderItem.FoodID))
                 {
                     return NotFound();
                 }
@@ -69,6 +72,8 @@ namespace RestaurantApplication.Controllers
                     throw;
                 }
             }
+            // Recalculate the order amount, because the orders could've changed by now
+            RecalculateOrderAmount(orderId);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -76,7 +81,8 @@ namespace RestaurantApplication.Controllers
         // POST: api/OrderItemsData
         [ResponseType(typeof(OrderItem))]
         [Authorize]
-        public IHttpActionResult PostOrderItem(OrderItem orderItem)
+        [HttpPost]
+        public IHttpActionResult CreateOrderItem(OrderItem orderItem)
         {
             if (!ModelState.IsValid)
             {
@@ -104,12 +110,13 @@ namespace RestaurantApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = orderItem.FoodID }, orderItem);
         }
 
-        // DELETE: api/OrderItemsData/5
+        // Post: api/OrderItemsData/DeleteOrderItem/5
         [ResponseType(typeof(OrderItem))]
         [Authorize]
-        public IHttpActionResult DeleteOrderItem(int id)
+        [HttpPost]
+        public IHttpActionResult DeleteOrderItem(int foodId, int orderId)
         {
-            OrderItem orderItem = db.OrdersItems.Find(id);
+            OrderItem orderItem = db.OrdersItems.Find(foodId, orderId);
             if (orderItem == null)
             {
                 return NotFound();
@@ -119,6 +126,121 @@ namespace RestaurantApplication.Controllers
             db.SaveChanges();
 
             return Ok(orderItem);
+        }
+
+        // A function to read the OrderItems table, and recalculate the item quantity to
+        // update OrderIDs table with the updated Total Amount
+        // GET: api/OrderItemsData/RecalculateOrderAmount/5
+        [HttpGet]
+        [Authorize]
+        public void RecalculateOrderAmount(int orderID)
+        {
+            IQueryable<OrderItem> orderItems = db.OrdersItems.Where(x => x.OrderID.OrderIDNumber == orderID);
+            decimal amount = 0;
+            foreach (var od in orderItems)
+            {
+                amount += od.SoldPrice * od.Quantity;
+            }
+
+            OrderID orderIDObject = db.OrderIDs.Find(orderID);
+            orderIDObject.TotalAmount = amount;
+            db.SaveChanges();
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        // POST: api/OrderItemsData/RecalculateAllOrderAmounts
+        // FixMe : The code is buggy, will require adding MARS to the DBContext reader to avoid multiple reader issue
+        public void RecalculateAllOrderAmounts()
+        {
+            IEnumerable<OrderItem> orderItems = GetOrdersItems();
+            foreach( var orders in orderItems)
+            {
+                RecalculateOrderAmount(orders.OrderIDNumber);
+            }
+        }
+
+        [HttpGet]
+        // POST: api/OrderItemsData/CheckOrderUpdate/5
+        // This is for the order status page to detect if any order related changes has been done
+        // If done, request the user to refresh the page.
+        public bool CheckOrderUpdate(int orderID, decimal amount)
+        {
+            OrderID orderIDObject = db.OrderIDs.Find(orderID);
+            if (orderIDObject.TotalAmount == amount)
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
+
+        // Method to receive the order from the action,
+        // process the order -> generate newOrder
+        // splits the lists into food : quantity
+        // create newOrderItems objects and write to db
+        // newOrderItems contains foodId, quantity, Price etc
+        // find the total amount quantity
+        [HttpPost]
+        public (int, OrderID) PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity, int? bookingID)
+        {
+            List<string> foodList = foodID.ToList();
+            List<string> quantityList = foodQuantity.ToList();
+
+            // on receiving order from the customer, create a new orderID object
+            // with a new ID and datatime
+            OrderID newOrder = new OrderID
+            {
+                OrderIDTime = DateTime.Now,
+                Status = OrderStatus.Placed
+            };
+            db.OrderIDs.Add(newOrder);
+            db.SaveChanges();
+            System.Diagnostics.Debug.WriteLine("OrderID" + newOrder.OrderIDNumber);
+
+            // once the orderID is generated,
+            // create the order with this orderID
+            // fetch food details -> price, soldprice / offerprice etc
+
+            // Server Validation to prevent orders with no item from being placed
+            var orderFlag = 0;
+
+            decimal amount = 0;
+            // iterate over the foodList and quantityList, fetch the food details
+            foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
+            {
+                System.Diagnostics.Debug.WriteLine(fd.Item1 + " " + fd.Item2);
+                if (Convert.ToInt32(fd.Item2) > 0)
+                {
+                    Food food = db.Foods.Find(Convert.ToInt32(fd.Item1));
+                    OrderItem newOrderItem = new OrderItem
+                    {
+                        FoodID = food.FoodID,
+                        BookingID = bookingID,
+                        Quantity = Convert.ToInt32(fd.Item2),
+                        FoodPrice = food.FoodPrice,
+                        SoldPrice = food.OfferPrice,
+                        OrderIDNumber = newOrder.OrderIDNumber
+                    };
+                    db.OrdersItems.Add(newOrderItem);
+                    db.SaveChanges();
+                    // for order verification
+                    orderFlag++;
+
+                    // amount calculation
+                    amount += newOrderItem.Quantity * newOrderItem.SoldPrice;
+                }
+
+            }
+
+
+            db.OrderIDs.Attach(newOrder);
+            newOrder.TotalAmount = amount;
+            db.SaveChanges();
+
+            return (orderFlag, newOrder);
         }
 
         protected override void Dispose(bool disposing)

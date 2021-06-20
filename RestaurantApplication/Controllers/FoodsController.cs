@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using RestaurantApplication.Models;
 
@@ -18,7 +19,9 @@ namespace RestaurantApplication.Controllers
         // GET: Foods
         public ActionResult Index()
         {
-            return View(db.Foods.ToList());
+            FoodDataController foodDataController = new FoodDataController();
+            IEnumerable<Food> foods = foodDataController.ShowAllFoods();
+            return View(foods);
         }
 
         // GET: Foods/Details/5
@@ -29,15 +32,19 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Food food = db.Foods.Find(id);
-            if (food == null)
+            FoodDataController foodDataController = new FoodDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodDataController.Details(Convert.ToInt32(id));
+            OkNegotiatedContentResult<Food> contentResult = actionResult as OkNegotiatedContentResult<Food>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            Food food = contentResult.Content;
             return View(food);
         }
 
         // GET: Foods/Create
+        // This method is for generating the form for creating a new food item.
         [Authorize]
         public ActionResult Create()
         {
@@ -50,12 +57,13 @@ namespace RestaurantApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar")] Food food)
+        public ActionResult Create([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar,FoodTypeID")] Food food)
         {
+            // verify the model state is valid or not before requesting the API to add the food
             if (ModelState.IsValid)
             {
-                db.Foods.Add(food);
-                db.SaveChanges();
+                FoodDataController foodDataController = new FoodDataController();
+                System.Web.Http.IHttpActionResult actionResult = foodDataController.AddFood(food);
                 return RedirectToAction("Index");
             }
 
@@ -63,6 +71,8 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: Foods/Edit/5
+        // For the admin to edit the food details, 
+        // This is just for the view to generate the fields with pre-filled information in input values
         [Authorize]
         public ActionResult Edit(int? id)
         {
@@ -70,11 +80,14 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Food food = db.Foods.Find(id);
-            if (food == null)
+            FoodDataController foodDataController = new FoodDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodDataController.Details(Convert.ToInt32(id));
+            OkNegotiatedContentResult<Food> contentResult = actionResult as OkNegotiatedContentResult<Food>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            Food food = contentResult.Content;
             return View(food);
         }
 
@@ -84,18 +97,25 @@ namespace RestaurantApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar")] Food food)
+        public ActionResult Edit([Bind(Include = "FoodID,FoodName,FoodDescription,FoodPrice,OfferPrice,OrderCount,FoodReviewStar,FoodTypeID")] Food food)
         {
+            // Preliminary inspection of ModelState validation before calling the API
             if (ModelState.IsValid)
             {
-                db.Entry(food).State = EntityState.Modified;
-                db.SaveChanges();
+                FoodDataController foodDataController = new FoodDataController();
+                System.Web.Http.IHttpActionResult actionResult = foodDataController.UpdateFood(food.FoodID, food);
                 return RedirectToAction("Index");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("ModelState Invalid");
             }
             return View(food);
         }
 
         // GET: Foods/Delete/5
+        // This is to delete the food from the system.
+        // Fetched the food ID and asks for confirmation
         [Authorize]
         public ActionResult Delete(int? id)
         {
@@ -103,23 +123,26 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Food food = db.Foods.Find(id);
-            if (food == null)
+            FoodDataController foodDataController = new FoodDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodDataController.Details(Convert.ToInt32(id));
+            OkNegotiatedContentResult<Food> contentResult = actionResult as OkNegotiatedContentResult<Food>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            Food food = contentResult.Content;
             return View(food);
         }
 
         // POST: Foods/Delete/5
+        // POST reques tto the API to delete the food with the id received as a parameter
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Food food = db.Foods.Find(id);
-            db.Foods.Remove(food);
-            db.SaveChanges();
+            FoodDataController foodDataController = new FoodDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodDataController.DeleteFood(Convert.ToInt32(id));
             return RedirectToAction("Index");
         }
 

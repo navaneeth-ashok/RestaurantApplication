@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - ABC Restaurant</title>
+    <title>@ViewBag.Title - Firehouse Pizzeria</title>
     @Styles.Render("~/Content/bootstrap5")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -31,10 +31,10 @@
             @Html.ActionLink("Home", "Index", new { controller = "Home" }, new { @class = "nav-link text-light" })
         </li>*@
                 <li class="nav-item">
-                    @Html.ActionLink("about us", "List", new { controller = "Food" }, new { @class = "nav-link text-light" })
+                    @Html.ActionLink("about us", "Index", new { controller = "Home" }, new { @class = "nav-link text-light"})
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("food n drink menu", "List", new { controller = "Food" }, new { @class = "nav-link text-light" })
+                    @Html.ActionLink("food & drink menu", "List", new { controller = "Food" }, new { @class = "nav-link text-light" })
                 </li>
                 <li class="nav-item">
                     @Html.ActionLink("book a table", "Create", new { controller = "Bookings" }, new { @class = "nav-link text-light" })

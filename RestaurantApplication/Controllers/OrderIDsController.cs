@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using RestaurantApplication.Models;
 using RestaurantApplication.Models.ViewModel;
@@ -19,69 +20,54 @@ namespace RestaurantApplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.OrderIDs.ToList());
+            OrderIDsDataController orderIDsDataController = new OrderIDsDataController();
+            IEnumerable<OrderID> orderIDs = orderIDsDataController.GetOrderIDs();
+            return View(orderIDs);
         }
 
         // GET: OrderIDs/Details/5
+        // This is customer facing method with custom view
+        // The customers are redirected to this page once the order is set.
+        // This view will contain, order details, order status and total amount
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderID orderID = db.OrderIDs.Find(id);
-            int orderIDToCheck = (int)id;
-            List<OrderItem> orderItems = db.OrdersItems.Where(o => o.OrderID.OrderIDNumber == orderIDToCheck).ToList();
-            // debug code
-            // Amount price is calculated on Order Now, this code should be removed
-            decimal amount = orderID.TotalAmount;
-            //foreach( var item in orderItems)
-            //{
-            //    System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.SoldPrice);
-            //    amount += item.Quantity * item.SoldPrice;
-            //}
 
-            OrderStatusFoodDetail orderStatusFoodDetail = new OrderStatusFoodDetail
-            {
-                OrderIDClassDetails = orderID,
-                OrderItemDetails = orderItems,
-                TotalOrderAmount = amount
-            };
-
-            // adding TotalAmount to the 
-
-            if (orderID == null)
-            {
-                return HttpNotFound();
-            }
+            OrderIDsDataController orderIDsDataController = new OrderIDsDataController();
+            OrderStatusFoodDetail orderStatusFoodDetail = orderIDsDataController.ListOrderStatus(Convert.ToInt32(id));
             return View(orderStatusFoodDetail);
         }
 
         // GET: OrderIDs/Create
+        // A function to generate the View for the Form to create new Order
+        // Not required, as the orders are created automatically
         [Authorize]
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: OrderIDs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OrderIDNumber,OrderIDTime")] OrderID orderID)
         {
             if (ModelState.IsValid)
             {
-                db.OrderIDs.Add(orderID);
-                db.SaveChanges();
+                OrderIDsDataController orderIDsDataController = new OrderIDsDataController();
+                System.Web.Http.IHttpActionResult actionResult = orderIDsDataController.CreateOrderID(orderID);
                 return RedirectToAction("Index");
             }
-
             return View(orderID);
         }
 
         // GET: OrderIDs/Edit/5
+        // To populate the form fields for the Edit View
         [Authorize]
         public ActionResult Edit(int? id)
         {
@@ -89,11 +75,15 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderID orderID = db.OrderIDs.Find(id);
-            if (orderID == null)
+            OrderIDsDataController orderIDsDataController = new OrderIDsDataController();
+            System.Web.Http.IHttpActionResult actionResult = orderIDsDataController.GetOrderID(Convert.ToInt32(id));
+            OkNegotiatedContentResult<OrderID> contentResult = actionResult as OkNegotiatedContentResult<OrderID>;
+            
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            OrderID orderID = contentResult.Content;
             return View(orderID);
         }
 
@@ -103,12 +93,12 @@ namespace RestaurantApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "OrderIDNumber,OrderIDTime,Status")] OrderID orderID)
+        public ActionResult Edit([Bind(Include = "OrderIDNumber,OrderIDTime,Status,TotalAmount")] OrderID orderID)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(orderID).State = EntityState.Modified;
-                db.SaveChanges();
+                OrderIDsDataController orderIDsDataController = new OrderIDsDataController();
+                System.Web.Http.IHttpActionResult actionResult = orderIDsDataController.EditOrderID(orderID.OrderIDNumber, orderID);
                 return RedirectToAction("Index");
             }
             return View(orderID);
@@ -122,11 +112,17 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderID orderID = db.OrderIDs.Find(id);
-            if (orderID == null)
+            // Receive the order ID details from the api controller
+            OrderIDsDataController orderIDsDataController = new OrderIDsDataController();
+            System.Web.Http.IHttpActionResult actionResult = orderIDsDataController.GetOrderID(Convert.ToInt32(id));
+            OkNegotiatedContentResult<OrderID> contentResult = actionResult as OkNegotiatedContentResult<OrderID>;
+            
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+
+            OrderID orderID = contentResult.Content;
             return View(orderID);
         }
 
@@ -136,9 +132,8 @@ namespace RestaurantApplication.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            OrderID orderID = db.OrderIDs.Find(id);
-            db.OrderIDs.Remove(orderID);
-            db.SaveChanges();
+            OrderIDsDataController orderIDsDataController = new OrderIDsDataController();
+            orderIDsDataController.DeleteOrderID(id);
             return RedirectToAction("Index");
         }
 
