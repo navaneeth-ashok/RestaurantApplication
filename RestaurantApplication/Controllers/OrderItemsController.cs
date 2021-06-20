@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using RestaurantApplication.Models;
 
@@ -18,73 +19,78 @@ namespace RestaurantApplication.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var ordersItems = db.OrdersItems.Include(o => o.Booking).Include(o => o.Food).Include(o => o.OrderID);
-            return View(ordersItems.ToList());
+            OrderItemsDataController orderItemsDataController = new OrderItemsDataController();
+            IEnumerable<OrderItem> orderItems = orderItemsDataController.GetOrdersItems();
+            return View(orderItems);
         }
 
         // GET: OrderItems/Details/5
-        [Authorize]
-        public ActionResult Details(int? id)
+        //[Authorize]
+        public ActionResult Details(int? foodId, int? orderId)
         {
-            if (id == null)
+            if (foodId == null || orderId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderItem orderItem = db.OrdersItems.Find(id);
-            if (orderItem == null)
+            OrderItemsDataController orderItemsDataController = new OrderItemsDataController();
+            System.Web.Http.IHttpActionResult actionResult = orderItemsDataController.GetOrderItem(Convert.ToInt32(foodId), Convert.ToInt32(orderId));
+            OkNegotiatedContentResult<OrderItem> contentResult = actionResult as OkNegotiatedContentResult<OrderItem>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            OrderItem orderItem = contentResult.Content;
             return View(orderItem);
         }
 
         // GET: OrderItems/Create
-        [Authorize]
-        public ActionResult Create()
-        {
-            ViewBag.BookingID = new SelectList(db.Bookings, "BookingID", "Allergies");
-            ViewBag.FoodID = new SelectList(db.Foods, "FoodID", "FoodName");
-            ViewBag.OrderIDNumber = new SelectList(db.OrderIDs, "OrderIDNumber", "OrderIDNumber");
-            return View();
-        }
+        // This code is not required as the Orders are created automatically by the PlaceOrder code
+        //[Authorize]
+        //public ActionResult Create()
+        //{
+        //    ViewBag.BookingID = new SelectList(db.Bookings, "BookingID", "Allergies");
+        //    ViewBag.FoodID = new SelectList(db.Foods, "FoodID", "FoodName");
+        //    ViewBag.OrderIDNumber = new SelectList(db.OrderIDs, "OrderIDNumber", "OrderIDNumber");
+        //    return View();
+        //}
 
         // POST: OrderItems/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind(Include = "FoodID,BookingID,Quantity,FoodPrice,SoldPrice,OrderIDNumber")] OrderItem orderItem)
-        {
-            if (ModelState.IsValid)
-            {
-                db.OrdersItems.Add(orderItem);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        // This code is not required as the Orders are created automatically by the PlaceOrder code
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize]
+        //public ActionResult Create([Bind(Include = "FoodID,BookingID,Quantity,FoodPrice,SoldPrice,OrderIDNumber")] OrderItem orderItem)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.OrdersItems.Add(orderItem);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.BookingID = new SelectList(db.Bookings, "BookingID", "Allergies", orderItem.BookingID);
-            ViewBag.FoodID = new SelectList(db.Foods, "FoodID", "FoodName", orderItem.FoodID);
-            ViewBag.OrderIDNumber = new SelectList(db.OrderIDs, "OrderIDNumber", "OrderIDNumber", orderItem.OrderIDNumber);
-            return View(orderItem);
-        }
+        //    ViewBag.BookingID = new SelectList(db.Bookings, "BookingID", "Allergies", orderItem.BookingID);
+        //    ViewBag.FoodID = new SelectList(db.Foods, "FoodID", "FoodName", orderItem.FoodID);
+        //    ViewBag.OrderIDNumber = new SelectList(db.OrderIDs, "OrderIDNumber", "OrderIDNumber", orderItem.OrderIDNumber);
+        //    return View(orderItem);
+        //}
 
         // GET: OrderItems/Edit/5
         [Authorize]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? foodId, int? orderId)
         {
-            if (id == null)
+            if (foodId == null || orderId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderItem orderItem = db.OrdersItems.Find(id);
-            if (orderItem == null)
+            OrderItemsDataController orderItemsDataController = new OrderItemsDataController();
+            System.Web.Http.IHttpActionResult actionResult = orderItemsDataController.GetOrderItem(Convert.ToInt32(foodId), Convert.ToInt32(orderId));
+            OkNegotiatedContentResult<OrderItem> contentResult = actionResult as OkNegotiatedContentResult<OrderItem>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BookingID = new SelectList(db.Bookings, "BookingID", "Allergies", orderItem.BookingID);
-            ViewBag.FoodID = new SelectList(db.Foods, "FoodID", "FoodName", orderItem.FoodID);
-            ViewBag.OrderIDNumber = new SelectList(db.OrderIDs, "OrderIDNumber", "OrderIDNumber", orderItem.OrderIDNumber);
+            
+            OrderItem orderItem = contentResult.Content;
             return View(orderItem);
         }
 
@@ -98,29 +104,31 @@ namespace RestaurantApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(orderItem).State = EntityState.Modified;
-                db.SaveChanges();
+                OrderItemsDataController orderItemsDataController = new OrderItemsDataController();
+                System.Web.Http.IHttpActionResult actionResult = orderItemsDataController.UpdateOrderItem(Convert.ToInt32(orderItem.FoodID), Convert.ToInt32(orderItem.OrderIDNumber), orderItem);
+                OkNegotiatedContentResult<OrderItem> contentResult = actionResult as OkNegotiatedContentResult<OrderItem>;
                 return RedirectToAction("Index");
             }
-            ViewBag.BookingID = new SelectList(db.Bookings, "BookingID", "Allergies", orderItem.BookingID);
-            ViewBag.FoodID = new SelectList(db.Foods, "FoodID", "FoodName", orderItem.FoodID);
-            ViewBag.OrderIDNumber = new SelectList(db.OrderIDs, "OrderIDNumber", "OrderIDNumber", orderItem.OrderIDNumber);
+
             return View(orderItem);
         }
 
         // GET: OrderItems/Delete/5
         [Authorize]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? foodId, int? orderId)
         {
-            if (id == null)
+            if (foodId == null || orderId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderItem orderItem = db.OrdersItems.Find(id);
-            if (orderItem == null)
+            OrderItemsDataController orderItemsDataController = new OrderItemsDataController();
+            System.Web.Http.IHttpActionResult actionResult = orderItemsDataController.GetOrderItem(Convert.ToInt32(foodId), Convert.ToInt32(orderId));
+            OkNegotiatedContentResult<OrderItem> contentResult = actionResult as OkNegotiatedContentResult<OrderItem>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            OrderItem orderItem = contentResult.Content;
             return View(orderItem);
         }
 
@@ -128,96 +136,29 @@ namespace RestaurantApplication.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int foodId, int orderId)
         {
-            OrderItem orderItem = db.OrdersItems.Find(id);
-            db.OrdersItems.Remove(orderItem);
-            db.SaveChanges();
+            OrderItemsDataController orderItemsDataController = new OrderItemsDataController();
+            orderItemsDataController.DeleteOrderItem(foodId, orderId);
             return RedirectToAction("Index");
         }
 
-        // OrderItems/PlaceOrder/
+        // This method receives the food and quantity list along with bookingID (opt)
+        // Send the same over to the API to generate an OrderID and redirects the user to the status page
+        // POST: OrderItems/PlaceOrder/
         [HttpPost]
         public ActionResult PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity, int? bookingID)
         {
-            List<string> foodList = foodID.ToList();
-            List<string> quantityList = foodQuantity.ToList();
-            //System.Diagnostics.Debug.WriteLine("FoodID" + foodList[0]);
-            //System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[0]);
-            //System.Diagnostics.Debug.WriteLine("FoodID" + foodList[1]);
-            //System.Diagnostics.Debug.WriteLine("FoodQuantity" + quantityList[1]);
-            //System.Diagnostics.Debug.WriteLine(DateTime.Now);
+            OrderItemsDataController orderItemsDataController = new OrderItemsDataController();
+            (int orderFlag, OrderID newOrder) = orderItemsDataController.PlaceOrder(foodID, foodQuantity, bookingID);
 
-
-            // on receiving order from the customer, create a new orderID object
-            // with a new ID and datatime
-            OrderID newOrder = new OrderID
-            {
-                OrderIDTime = DateTime.Now,
-                Status = OrderStatus.Placed
-            };
-            db.OrderIDs.Add(newOrder);
-            db.SaveChanges();
-            System.Diagnostics.Debug.WriteLine("OrderID" + newOrder.OrderIDNumber);
-
-            // once the orderID is generated,
-            // create the order with this orderID
-            // fetch food details -> price, soldprice / offerprice etc
-
-            // Booking id default Setting
-            //int bookingIDNew = 1;
-            //if(bookingID != null)
-            //{
-            //    bookingIDNew = (int)bookingID;
-            //}
-
-            // Server Validation to prevent orders with no item from being placed
-            var orderFlag = 0;
-
-            decimal amount = 0;
-            // iterate over the foodList and quantityList, fetch the food details
-            foreach (var fd in foodList.Zip(quantityList, Tuple.Create))
-            {
-                System.Diagnostics.Debug.WriteLine(fd.Item1 + " " + fd.Item2);
-                if(Convert.ToInt32(fd.Item2) > 0)
-                {
-                    Food food = db.Foods.Find(Convert.ToInt32(fd.Item1));
-                    OrderItem newOrderItem = new OrderItem
-                    {
-                        FoodID = food.FoodID,
-                        BookingID = bookingID, // lets have bookingID as 1 if booking is not mentioned #WIP: Fetch the BookingID
-                        Quantity = Convert.ToInt32(fd.Item2),
-                        FoodPrice = food.FoodPrice,
-                        SoldPrice = food.OfferPrice,
-                        OrderIDNumber = newOrder.OrderIDNumber
-                    };
-                    db.OrdersItems.Add(newOrderItem);
-                    db.SaveChanges();
-                    // for order verification
-                    orderFlag++;
-
-                    // amount calculation
-                    amount += newOrderItem.Quantity * newOrderItem.SoldPrice; 
-                }
-                
-            }
-
-
-            db.OrderIDs.Attach(newOrder);
-            newOrder.TotalAmount = amount;
-            db.SaveChanges();
-
-            if(orderFlag == 0)
+            if (orderFlag == 0)
             {
                 return RedirectToAction("List", "Food");
             } else
             {
                 return RedirectToAction("/Details/" + newOrder.OrderIDNumber, "OrderIDs");
             }
-
-            
-
-
 
         }
 

@@ -7,6 +7,9 @@
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
+<p>If this booking is associated with an order, you'll not be able to delete the booking.</p>
+<p>You'll have to delete the associated order before deleting the booking.</p>
+<p>In this case, the deletion will not happen and you'll be taken to the main booking page.</p>
 <div>
     <h4>BookingID :  @Html.DisplayFor(model => model.BookingID)</h4>
     <hr />

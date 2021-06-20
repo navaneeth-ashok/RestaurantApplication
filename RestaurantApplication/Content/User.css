@@ -225,6 +225,13 @@ h2.sticky-top.filter{
     padding: 20px 0px 20px 0px;
 }
 
+#orderNotification {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
 @media only screen and (max-width: 992px) {
     .totalAmount{
         text-align:center;

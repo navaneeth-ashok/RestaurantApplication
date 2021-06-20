@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using RestaurantApplication.Models;
 
@@ -17,7 +18,9 @@ namespace RestaurantApplication.Controllers
         // GET: FoodTypes
         public ActionResult Index()
         {
-            return View(db.FoodTypes.ToList());
+            FoodTypesDataController foodTypesDataController = new FoodTypesDataController();
+            IEnumerable<FoodType> foodTypes = foodTypesDataController.GetFoodTypes();
+            return View(foodTypes);
         }
 
         // GET: FoodTypes/Details/5
@@ -27,15 +30,19 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FoodType foodType = db.FoodTypes.Find(id);
-            if (foodType == null)
+            FoodTypesDataController foodTypesDataController = new FoodTypesDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodTypesDataController.GetFoodType(Convert.ToInt32(id));
+            OkNegotiatedContentResult<FoodType> contentResult = actionResult as OkNegotiatedContentResult<FoodType>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            FoodType foodType = contentResult.Content;
             return View(foodType);
         }
 
         // GET: FoodTypes/Create
+        // For generating the view for creating the FoodTypes
         [Authorize]
         public ActionResult Create()
         {
@@ -43,17 +50,16 @@ namespace RestaurantApplication.Controllers
         }
 
         // POST: FoodTypes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
         public ActionResult Create([Bind(Include = "TypeID,TypeName,TypeDisplayName")] FoodType foodType)
         {
+            // pre-validation in the action method for the input foodType before sending to the API
             if (ModelState.IsValid)
             {
-                db.FoodTypes.Add(foodType);
-                db.SaveChanges();
+                FoodTypesDataController foodTypesDataController = new FoodTypesDataController();
+                foodTypesDataController.CreateFoodType(foodType);
                 return RedirectToAction("Index");
             }
 
@@ -68,17 +74,19 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FoodType foodType = db.FoodTypes.Find(id);
-            if (foodType == null)
+            FoodTypesDataController foodTypesDataController = new FoodTypesDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodTypesDataController.GetFoodType(Convert.ToInt32(id));
+            OkNegotiatedContentResult<FoodType> contentResult = actionResult as OkNegotiatedContentResult<FoodType>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            FoodType foodType = contentResult.Content;
             return View(foodType);
         }
 
         // POST: FoodTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -86,8 +94,8 @@ namespace RestaurantApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(foodType).State = EntityState.Modified;
-                db.SaveChanges();
+                FoodTypesDataController foodTypesDataController = new FoodTypesDataController();
+                System.Web.Http.IHttpActionResult actionResult = foodTypesDataController.EditFoodType(foodType.TypeID, foodType);
                 return RedirectToAction("Index");
             }
             return View(foodType);
@@ -101,11 +109,14 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FoodType foodType = db.FoodTypes.Find(id);
-            if (foodType == null)
+            FoodTypesDataController foodTypesDataController = new FoodTypesDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodTypesDataController.GetFoodType(Convert.ToInt32(id));
+            OkNegotiatedContentResult<FoodType> contentResult = actionResult as OkNegotiatedContentResult<FoodType>;
+            if (contentResult == null)
             {
                 return HttpNotFound();
             }
+            FoodType foodType = contentResult.Content;
             return View(foodType);
         }
 
@@ -115,9 +126,8 @@ namespace RestaurantApplication.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            FoodType foodType = db.FoodTypes.Find(id);
-            db.FoodTypes.Remove(foodType);
-            db.SaveChanges();
+            FoodTypesDataController foodTypesDataController = new FoodTypesDataController();
+            System.Web.Http.IHttpActionResult actionResult = foodTypesDataController.DeleteFoodType(Convert.ToInt32(id));
             return RedirectToAction("Index");
         }
 

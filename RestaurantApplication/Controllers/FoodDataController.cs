@@ -37,6 +37,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: api/FoodData/FindFood/5
+        // This method is used to generate the FoodDto for customer, masking few sensitive details
         [ResponseType(typeof(Food))]
         [HttpGet]
         public IHttpActionResult FindFood(int id)
@@ -55,6 +56,35 @@ namespace RestaurantApplication.Controllers
             }
 
             return Ok(foodDto);
+        }
+
+        // GET: api/FoodData/Details/5
+        // This method is used to generate the food object for admin,
+        // contains all possible food db data
+        [Authorize]
+        [ResponseType(typeof(Food))]
+        [HttpGet]
+        public IHttpActionResult Details(int id)
+        {
+            Food food = db.Foods.Find(id);
+           
+            if (food == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(food);
+        }
+
+        [HttpGet]
+        [Authorize]
+        // Get: /api/FoodData/ShowAllFoods
+        // This is for admin to view all the food details
+        public IEnumerable<Food> ShowAllFoods()
+        {
+            List<Food> Foods = db.Foods.ToList();
+
+            return Foods;
         }
 
         // PUT: api/FoodData/UpdateFood/5
@@ -111,7 +141,7 @@ namespace RestaurantApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = food.FoodID }, food);
         }
 
-        // POST: api/FoodData/DeleteAnimal/5
+        // POST: api/FoodData/DeleteFood/5
         [ResponseType(typeof(Food))]
         [HttpPost]
         [Authorize]

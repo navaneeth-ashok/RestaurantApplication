@@ -16,13 +16,13 @@ namespace RestaurantApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/FoodTypesData
-        public IQueryable<FoodType> GetFoodTypes()
+        // GET: api/FoodTypesData/GetFoodTypes
+        public IEnumerable<FoodType> GetFoodTypes()
         {
             return db.FoodTypes;
         }
 
-        // GET: api/FoodTypesData/5
+        // GET: api/FoodTypesData/GetFoodType/5
         [ResponseType(typeof(FoodType))]
         public IHttpActionResult GetFoodType(int id)
         {
@@ -35,10 +35,11 @@ namespace RestaurantApplication.Controllers
             return Ok(foodType);
         }
 
-        // PUT: api/FoodTypesData/5
+        // POST: api/FoodTypesData/EditFoodType/5
         [ResponseType(typeof(void))]
         [Authorize]
-        public IHttpActionResult PutFoodType(int id, FoodType foodType)
+        [HttpPost]
+        public IHttpActionResult EditFoodType(int id, FoodType foodType)
         {
             if (!ModelState.IsValid)
             {
@@ -71,10 +72,11 @@ namespace RestaurantApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/FoodTypesData
+        // POST: api/FoodTypesData/CreateFoodType
         [ResponseType(typeof(FoodType))]
         [Authorize]
-        public IHttpActionResult PostFoodType(FoodType foodType)
+        [HttpPost]
+        public IHttpActionResult CreateFoodType(FoodType foodType)
         {
             if (!ModelState.IsValid)
             {
@@ -87,7 +89,7 @@ namespace RestaurantApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = foodType.TypeID }, foodType);
         }
 
-        // DELETE: api/FoodTypesData/5
+        // POST: api/FoodTypesData/DeleteFoodType/5
         [ResponseType(typeof(FoodType))]
         [Authorize]
         public IHttpActionResult DeleteFoodType(int id)
