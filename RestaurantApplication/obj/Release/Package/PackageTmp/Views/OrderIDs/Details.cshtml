@@ -1,0 +1,145 @@
+﻿@model RestaurantApplication.Models.ViewModel.OrderStatusFoodDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_UserPage.cshtml";
+}
+
+<h2>Order Details</h2>
+
+<div>
+    <h4>OrderID : @Model.OrderIDClassDetails.OrderIDNumber</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.Encode("Ordered On")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderIDClassDetails.OrderIDTime)
+        </dd>
+
+        <dt>
+            @Html.Encode("Order Status")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderIDClassDetails.Status)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.TotalOrderAmount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TotalOrderAmount)
+            </dd>*@
+        @{ foreach (var item in Model.OrderItemDetails)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Food.FoodName + " " + item.FoodPrice + " " + item.Quantity + " " + item.FoodPrice * item.Quantity);
+            }
+        }
+
+
+
+    </dl>
+    <table class="table orderBar orderPreview table-borderless">
+        <thead>
+            <tr>
+                <th>
+                    @Html.Encode("Item")
+                </th>
+                <th>
+                    @Html.Encode("Price")
+                </th>
+                <th>
+                    @Html.Encode("Quantity")
+                </th>
+                <th>
+                    @Html.Encode("Price")
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.OrderItemDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.FoodName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoldPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.Encode(item.SoldPrice * item.Quantity)
+                </td>
+            </tr>
+        }
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>@Html.Encode("Total")</td>
+                <td>@Html.DisplayFor(model => model.TotalOrderAmount)</td>
+            </tr>
+
+        </tfoot>
+
+    </table>
+</div>
+<div class="orderMore">
+    @Html.ActionLink("Order More", "List", new { controller = "Food" }, new { @class= "btn btn-success" })
+</div>
+
+<div>
+    <form method="POST" action="/Payment/Index" id="payButton">
+        <input type="hidden" name="OrderID" value="@Model.OrderIDClassDetails.OrderIDNumber">
+        <input type="submit" class="btn btn-warning" value="Pay" />
+    </form>
+    <div class="ms-auto me-auto" id="orderNotification">
+        <p>The order has been updated, please refresh the page or click here to fetch the update. </p>
+        <button class="btn btn-info" id="fetch" onclick="refresh()">Refresh</button>
+    </div>
+    
+</div>
+
+<script>
+    $(document).ready(function () {
+        const interval = setInterval(function () { checkForOrderUpdate() }, 5000);
+    });
+
+    function refresh() {
+        location.reload(true);
+    }
+
+    function checkForOrderUpdate() {
+        var serviceURL = 'api/OrderItemsData/CheckOrderUpdate/?orderID=' + @Model.OrderIDClassDetails.OrderIDNumber +
+                    '&amount=' + @Model.OrderIDClassDetails.TotalAmount;
+        var baseApplicationPath = '@Url.Content("~/")';
+
+        $.ajax({
+            type: "GET",
+            url: baseApplicationPath + serviceURL,
+            data: param = "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: successFunc,
+            error: errorFunc
+        });
+    }
+
+    function successFunc(data, status) {
+        if (data === true) {
+            $('#orderNotification').show();
+        }
+    }
+
+    function errorFunc() {
+        console.log('Error checking for updated order status');
+    }
+
+</script>

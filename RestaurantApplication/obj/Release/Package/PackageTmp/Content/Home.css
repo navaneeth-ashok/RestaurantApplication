@@ -1,0 +1,130 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap');
+
+
+body {
+    background-image: url(../Content/images/homepage.jpg);
+}
+
+.front-banner {
+    /*height:80vh;*/
+}
+
+h1 {
+    font-size: 3em;
+    font-family: 'Viaoda Libre', cursive;
+}
+
+h2 {
+    font-family: 'Viaoda Libre', cursive;
+}
+
+#headingFirst{
+    font-weight:bolder;
+}
+
+.about p{
+    text-align:center;
+}
+
+.about{
+    padding: 0px 40px 0 40px;
+}
+
+.carousel-item{
+    max-height: 400px;
+}
+
+.home-link {
+    background-color: #0d6efd00;
+    border: none;
+    font-size: 1.4em;
+    border-radius: 0px;
+    transition: background-color 300ms ease-out;
+}
+
+.home-link:hover{
+    background-color: rgb(160 159 159 / 0.50);
+    transition: background-color 300ms ease-in;
+}
+
+.navLinks {
+    margin-top: 40px;
+    background-color: rgb(101 101 101 / 0.48);
+    padding: 20px 0px 20px 0px;
+    transition: background-color 500ms ease-out;
+}
+
+.navlink-dark {
+    background-color: rgb(31 31 31 / 98%);
+    transition: background-color 500ms ease-in;
+}
+
+#brand{
+    font-size: 2em;
+    color:burlywood;
+}
+
+.navLinks .col {
+    text-align:center;
+}
+
+/*.navbar-brand-centered img{
+    width:200px;
+    transform: translate(-20%,0);
+}*/
+
+.location-list {
+    list-style: none;
+}
+
+.location-list li button{
+    background: none;
+    color: inherit;
+    border: none;
+}
+
+.location-list li button:hover {
+    color: #dfa760;
+}
+
+.location-list li button:focus {
+    color: #e19433;
+}
+
+#map {
+    height: 200px;
+    /* The height is 400 pixels */
+    width: 100%;
+}
+
+.social-icons .col {
+    padding: 0;
+}
+
+.social-icons .col > img {
+    background-color: rgb(222 222 222 / 75%);
+    border-radius: 5px;
+    padding: 10px;
+    width: 48px;
+    transition: background-color 500ms ease-in;
+}
+
+.social-icons .col > img:hover {
+    background-color: rgb(255 253 253);
+    cursor: pointer;
+    transition: background-color 500ms ease-out;
+}
+
+@media only screen and (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .about{
+        padding: 0px;
+    }
+
+    .carousel-item {
+        max-height: 200px;
+    }
+}

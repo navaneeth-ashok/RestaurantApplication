@@ -1,0 +1,66 @@
+﻿@model RestaurantApplication.Models.BookingDto
+
+@{
+    ViewBag.Title = "Booking Status";
+    Layout = "~/Views/Shared/_UserPage.cshtml";
+}
+<link rel="stylesheet" href="~/Content/booking.css">
+
+<h2>Booking Status</h2>
+
+<div class="bookingStatus ms-auto me-auto">
+    <div class="container bookingStatus ms-auto me-auto">
+
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.Encode("Booking ID")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BookingID)
+            </dd>
+
+            <dt>
+                @Html.Encode("Number of Guests")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NumberOfOccupants)
+            </dd>
+
+
+            <dt>
+                @Html.Encode("Booking Date and Time")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BookingDateTime)
+            </dd>
+
+            <dt>
+                @Html.Encode("Booking Status")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+        </dl>
+    </div>
+
+    @if (Convert.ToString(Model.Status) == "Confirmed")
+    {
+        @*@Html.ActionLink("Order Food", "ListNew", new { controller = "Food", id = Model.BookingID });*@
+        <form action="/Food/ListNew" method="post" class="OrderForm">
+            <input type="hidden" id="bookingId" name="bookingId" value="@Model.BookingID">
+            <input type="submit" value="Order Food" class="btn btn-primary orderBtnBooking" />
+        </form>
+    }
+    else
+    {
+        @Html.Raw("<p class='ms-auto me-auto p-3'>Ordering link will be shown here, once the restaurant confirms the order<p>");
+    }
+</div>
+

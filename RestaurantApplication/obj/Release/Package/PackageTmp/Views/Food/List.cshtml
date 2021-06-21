@@ -1,0 +1,91 @@
+﻿@model IEnumerable<RestaurantApplication.Models.FoodDto>
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Views/Shared/_UserPage.cshtml";
+}
+<div class="sticky-top filter">
+    <h2 class="">Menu</h2>
+    @{
+        int food_id = 0;
+        HashSet<string> foodDispType = new HashSet<string>();
+        HashSet<string> foodType = new HashSet<string>();
+        foreach (var food in Model)
+        {
+            foodType.Add(food.FoodType.TypeName);
+            foodDispType.Add(food.FoodType.TypeDisplayName);
+
+        }
+        <div class="ms-auto me-auto text-center" id="itemList">
+            <div class="list-inline">
+                <button class="list-inline-item filter-btn" onclick="filterMenu('All')" autofocus>All</button>
+                @foreach (var fnum in foodType.Zip(foodDispType, Tuple.Create))
+                {
+                    <button class="list-inline-item filter-btn" onclick="filterMenu('@fnum.Item1')">@fnum.Item2</button>
+                }
+            </div>
+        </div>
+    }
+</div>
+<div class="ms-auto me-auto menu">
+
+    <form method="POST" action="/OrderItems/PlaceOrder/" onsubmit="validateEmptyOrder();" class="container">
+        <div class="row">
+            <div class="col-sm-8 menu-list">
+                @foreach (var food in Model)
+                {
+                    <div class="orderList container @food.FoodType.TypeName">
+                        <div class="row">
+                            <div class="orderDetail col-lg-10">
+                                <h3 class="foodName">@food.FoodName</h3>
+                                <div>@food.FoodDescription</div>
+                                <p id="foodPrice_@food_id" class="foodPrice">$@food.OfferPrice</p>
+                                <div>
+                                    @for (int i = 0; i < Convert.ToInt32(@food.FoodReviewStar); i++)
+                                    {
+                                        <span>&#9733;</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="menu-form orderAction col-md-4">
+                                <input type="hidden" name="foodID" value="@food.FoodID">
+                                <div class="orderButtons ms-auto">
+                                    <label for="foodQuantity_@food_id">Quantity</label> &nbsp;&nbsp;  <button id="remove_@food_id" class="btn btn-danger food_remove"><span class="orderButtonText">-</span></button><input type="text" id="foodQuantity_@food_id" name="foodQuantity" value="0" class="foodQ" /><button id="add_@food_id" class="btn btn-success food_add"><span class="orderButtonText">+</span></button>
+                                </div>
+                                @*<input type="text" name="foodID" value="@food.OfferPrice * ">*@
+                            </div>
+
+                        </div>
+                        <hr />
+                    </div>
+
+                    food_id++;
+                }
+            </div>
+            <div class="orderBar col-lg-4" id="orderBar">
+                <div class="container">
+                    <div class="row">
+                        <div id="orderWarning">Oops!!! There is nothing in your cart. Add an item to continue.</div>
+                        <div class="col mainOrderButton">
+                            <table class="table orderPreview table-borderless" id="orderPreviewTable">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Order</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <hr />
+                            <div class="totalAmount">Total: <span id="totalAmt"></span>$</div>
+                            <div class="orderBtn"><input type="submit" value="Order" class="btn btn-primary" /></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <a href="#orderBar" class="btn btn-primary order-Navigator" id="orderNavigator">Order</a>
+</div>
+
+<script src="~/Scripts/menu.js"></script>

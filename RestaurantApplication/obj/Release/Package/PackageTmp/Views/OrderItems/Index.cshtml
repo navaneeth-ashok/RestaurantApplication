@@ -1,0 +1,86 @@
+﻿@model IEnumerable<RestaurantApplication.Models.OrderItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="~/Content/dataTables.min.css" />
+<script src="~/Scripts/dataTables.js"></script>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-borderless table-hover" id="sortTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderID.OrderIDNumber)
+                @Html.Raw("Order Status")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Food.FoodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking.Allergies)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoldPrice)
+            </th>
+            <th>Detailed Operations</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.OrderID.OrderIDNumber)*@
+                    @Html.ActionLink(Convert.ToString(item.OrderID.OrderIDNumber), "Edit", new { controller = "OrderIDs", id = Convert.ToInt32(item.OrderID.OrderIDNumber) })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.FoodName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.Allergies)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoldPrice)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { foodId = item.FoodID, orderId = item.OrderID.OrderIDNumber }) |
+                    @Html.ActionLink("Details", "Details", new { foodId = item.FoodID, orderId = item.OrderID.OrderIDNumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { foodId = item.FoodID, orderId = item.OrderID.OrderIDNumber })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        $('#sortTable').DataTable();
+    });
+</script>

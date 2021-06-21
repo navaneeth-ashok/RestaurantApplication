@@ -1,0 +1,66 @@
+﻿@model RestaurantApplication.Models.OrderItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Booking.Allergies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Booking.Allergies)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Food.FoodName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Food.FoodName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderID.OrderIDNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderID.OrderIDNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoldPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoldPrice)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { foodId = Model.FoodID, orderId = Model.OrderID.OrderIDNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
