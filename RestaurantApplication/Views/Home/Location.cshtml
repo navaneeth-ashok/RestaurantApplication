@@ -2,7 +2,7 @@
     ViewBag.Title = "Location";
     //Layout = "~/Views/Shared/_UserPage.cshtml";
 }
-<div class="front-banner container">
+<div class="front-banner container" id="location-div">
     <div class="row">
         <div class="innerText col-sm-4">
             <h2>Locations</h2>
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <ul class="location-list p-0">
-                            <li><button onclick="showLocation('cn')">Canada</button></li>
+                            <li><button onclick="showLocation('cn')" autofocus style="outline: none">Canada</button></li>
                             <li class="mt-2"><button onclick="showLocation('us')">USA</button></li>
                             <li class="mt-2"><button onclick="showLocation('it')">Italy</button></li>
                             <li class="mt-2"><button onclick="showLocation('in')">India</button></li>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div id="map"></div>
-                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNcvGXnGUHb50-MFQhLUFuPH2W9VtPMz4&callback=initMap&libraries=&v=weekly"
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALDMjiXwo0HDFhzhZS3rN0R-YyoNnbYCk&callback=initMap&libraries=&v=weekly"
                                 async></script>
                     </div>
 

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Manage Restaurant</h2>
+
+<ul>
+    <li>
+        @Html.ActionLink("Menu", "Index", new { controller = "Foods" })
+    </li>
+    <li>
+        @Html.ActionLink("Booking", "Index", new { controller = "Bookings" })
+    </li>
+
+    <li>
+        @Html.ActionLink("Orders", "Index", new { controller = "OrderIDs" })
+    </li>
+
+    <li>
+        @Html.ActionLink("Order Log", "Index", new { controller = "OrderItems" })
+    </li>
+
+    <li>
+        @Html.ActionLink("Food Type", "Index", new { controller = "FoodTypes" })
+    </li>
+</ul>
+

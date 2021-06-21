@@ -1,0 +1,80 @@
+﻿@model IEnumerable<RestaurantApplication.Models.Food>
+
+@{
+    ViewBag.Title = "Menu";
+}
+<link rel="stylesheet" href="~/Content/dataTables.min.css" />
+<script src="~/Scripts/dataTables.js"></script>
+<h2>Manage Menu</h2>
+
+<p>
+    @Html.ActionLink("Add new food", "Create")
+</p>
+<table class="table" id="sortTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodType.TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfferPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodReviewStar)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.FoodName, "Details", new { id = item.FoodID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodType.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfferPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodReviewStar)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.FoodID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.FoodID })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#sortTable').DataTable();
+    });
+</script>
+

@@ -1,0 +1,89 @@
+﻿body{
+    background-image: url(../Content/images/booking.jpg)
+}
+
+.tableBooking {
+    text-align: center;
+}
+
+input {
+    margin: 0 auto;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+/*slider for the number of customer field*/
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none; /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 10px; /* Specified height */
+    background: #d3d3d37a; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #ff6a00; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border: none;
+    border-radius: 5px;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #ff6a00; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border: none;
+    border-radius: 5px;
+}
+
+.amt-badge {
+    background-color: #4e4e4ec7;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    max-width: 280px;
+    font-size: 1.2em;
+    color:white;
+    margin-bottom: 30px;
+}
+
+.bookingStatus {
+    text-align:center;
+    background-color: rgb(0 0 0 / 0.7);
+    max-width: 300px;
+    padding-bottom:50px;
+}
+
+.bookingStatus dt {
+    color: grey;
+    padding-top: 10px;
+}
+
+/*.orderBtnBooking{
+    margin: 0 auto;
+    text-align:center;
+}*/
+
+.OrderForm{
+    text-align:center;
+}

@@ -60,4 +60,5 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 
 ## Updates
 
--- 15-06-2021 : Admin modules are reachable through /Admin link, Manage options removed from User facing Layout
+- 15-06-2021 : Admin modules are reachable through /Admin link, Manage options removed from User facing Layout
+- 21-06-2021 : UI updated, Payment with RazorPay integrated, Google Maps API integrated
