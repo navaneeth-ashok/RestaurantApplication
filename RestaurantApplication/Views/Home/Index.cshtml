@@ -36,25 +36,25 @@
 <div class="container navLinks sticky-top">
     <div class="row">
         <div class="col">
-            <a href="#" class="btn btn-primary home-link">about</a>
+            <a href="#about-div" class="btn btn-primary home-link">about</a>
         </div>
         <div class="col">
-            <a href="#" class="btn btn-primary home-link">food</a>
+            @Html.ActionLink("food", "List", "Food", new { area = "" }, new { @class = "btn btn-primary home-link" })
         </div>
         <div class="col">
-            <a href="#" class="btn btn-primary home-link">drinks</a>
+            @Html.ActionLink("drinks", "List", "Food", new { area = "" }, new { @class = "btn btn-primary home-link" })
         </div>
         <div class="col">
-            <a href="#" class="btn btn-primary home-link">booking</a>
+            @Html.ActionLink("booking", "Create", "Bookings", new { area = "" }, new { @class = "btn btn-primary home-link" })
         </div>
         <div class="col">
-            <a href="#" class="btn btn-primary home-link">locations</a>
+            <a href="#location-div" class="btn btn-primary home-link">locations</a>
         </div>
         <div class="col">
             <a href="#" class="btn btn-primary home-link">delivery</a>
         </div>
         <div class="col">
-            <a href="#" class="btn btn-primary home-link">contact</a>
+            <a href="#contact-us" class="btn btn-primary home-link">contact</a>
         </div>
 
     </div>

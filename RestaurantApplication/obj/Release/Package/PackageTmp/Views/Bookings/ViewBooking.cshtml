@@ -43,7 +43,7 @@
                 @Html.Encode("Booking Status")
             </dt>
 
-            <dd>
+            <dd id="bookingStatus">
                 @Html.DisplayFor(model => model.Status)
             </dd>
 
@@ -64,3 +64,45 @@
     }
 </div>
 
+
+<script>
+    var interval;
+    $(document).ready(function () {
+        if (document.getElementById('bookingStatus').innerText == 'Pending') {
+            interval = setInterval(function () { checkForOrderUpdate() }, 10000);
+        }
+    });
+
+    function refresh() {
+        location.reload(true);
+    }
+
+    function checkForOrderUpdate() {
+        var serviceURL = 'api/BookingsData/ViewBooking/' + @Model.BookingID;
+        var baseApplicationPath = '@Url.Content("~/")';
+
+        $.ajax({
+            type: "GET",
+            url: baseApplicationPath + serviceURL,
+            data: param = "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: successFunc,
+            error: errorFunc
+        });
+    }
+
+    function successFunc(data, status) {
+        console.log(data['Status']);
+        if (document.getElementById('bookingStatus').innerText == 'Pending' && data['Status'] == 1) {
+            clearInterval(interval);
+            location.reload();
+            
+        }
+    }
+
+    function errorFunc() {
+        console.log('Error checking for updated order status');
+    }
+
+</script>

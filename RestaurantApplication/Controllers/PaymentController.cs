@@ -60,7 +60,7 @@ namespace RestaurantApplication.Controllers
             Random randomObj = new Random();
             string transactionId = randomObj.Next(10000000, 100000000).ToString();
 
-            Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_dTBD7wqaumXJ5j", "AOm2UZvORrtH5e8YMT8243ds");
+            Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_xzvHZzwZFsSfAV", "mmKAVydo77zVQwD3JBKyiRiS");
             Dictionary<string, object> options = new Dictionary<string, object>();
             System.Diagnostics.Debug.WriteLine(_requestData.amount * 100);
             System.Diagnostics.Debug.WriteLine(_requestData.amount);
@@ -76,14 +76,14 @@ namespace RestaurantApplication.Controllers
             OrderModel orderModel = new OrderModel
             {
                 orderId = orderResponse.Attributes["id"],
-                razorpayKey = "rzp_test_dTBD7wqaumXJ5j",
+                razorpayKey = "rzp_test_xzvHZzwZFsSfAV",
                 amount = _requestData.amount * 100,
-                currency = "INR",
+                currency = "USD",
                 name = _requestData.name,
                 email = _requestData.email,
                 contactNumber = _requestData.contactNumber,
                 address = _requestData.address,
-                description = "Testing description"
+                description = "Sample Payment by Navaneeth"
             };
 
             // Return on PaymentPage with Order data
@@ -116,7 +116,7 @@ namespace RestaurantApplication.Controllers
             // This is orderId
             string orderId = Request.Params["rzp_orderid"];
 
-            Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_dTBD7wqaumXJ5j", "AOm2UZvORrtH5e8YMT8243ds");
+            Razorpay.Api.RazorpayClient client = new Razorpay.Api.RazorpayClient("rzp_test_xzvHZzwZFsSfAV", "mmKAVydo77zVQwD3JBKyiRiS");
 
             Razorpay.Api.Payment payment = client.Payment.Fetch(paymentId);
 
