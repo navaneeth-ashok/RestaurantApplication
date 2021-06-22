@@ -73,8 +73,8 @@ function renderOrderList() {
     // removing existing content
     previewTable.querySelector("tbody").innerHTML = "";
     for (order of orderList) {
-        console.log(order.querySelector(".foodName").textContent);
-        console.log(order.querySelector(".foodQ").value);
+        //console.log(order.querySelector(".foodName").textContent);
+        //console.log(order.querySelector(".foodQ").value);
         orderQuantity = parseInt(order.querySelector(".foodQ").value);
         if (orderQuantity > 0) {
             let row = previewTable.insertRow();

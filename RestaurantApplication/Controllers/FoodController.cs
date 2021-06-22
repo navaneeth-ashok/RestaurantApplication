@@ -7,30 +7,32 @@ using System.Net.Http;
 using RestaurantApplication.Models;
 using RestaurantApplication.Models.ViewModel;
 using System.Web.Script.Serialization;
+
 namespace RestaurantApplication.Controllers
 {
     // Food controller is mainly user facing controller, FoodsController is for the Admin
     // This will be combined at a later stage
     public class FoodController : Controller
     {
-        private static readonly HttpClient client;
-        private JavaScriptSerializer jss = new JavaScriptSerializer();
-        static FoodController()
-        {
-            client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44329/api/");
-        }
+        //private static readonly HttpClient client;
+        //private JavaScriptSerializer jss = new JavaScriptSerializer();
+        private readonly Client client = new Client();
+
         // GET: Food/List
         // List is shown when a user directly clicks on the Menu link in th navbar
         public ActionResult List()
         {
             //retrieve the list of food items
-            //string url = "FoodData/ListFoods";
-            //HttpResponseMessage response = client.GetAsync(url).Result;
 
-            //IEnumerable<FoodDto> foods = response.Content.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            // HttpClient Implementation
+            //string url = "FoodData/ListFoods";
+            //var resp = client.Execute(url);
+            //IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+
+            //Datacontroller implementation
             FoodDataController foodDataController = new FoodDataController();
             IEnumerable<FoodDto> foods = foodDataController.ListFoods();
+
             return View(foods);
         }
 
