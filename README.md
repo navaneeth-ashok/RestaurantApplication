@@ -48,12 +48,12 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
    2. Almost all CRUD functionalities for the same is provided now.
 
 ## Note
-- For the api-user to fetch the data make sure your DB contains a user, and the user's detail is added to Client.cs under Models
+- For the api-user to fetch the data, make sure your DB contains a user, and the user's detail is added to Client.cs under Models.
    
 ## Screenshots
 
 ### Desktop
-- ![Desktop Main Page](screenshots/desktop_1.png | width=100)
+- <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_1.png" width="300">
 
 ### Mobile
 
