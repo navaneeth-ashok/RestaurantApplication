@@ -302,3 +302,8 @@ C:\Users\navaneeth\source\repos\RestaurantApp\RestaurantApplication\RestaurantAp
 C:\Users\navaneeth\source\repos\RestaurantApp\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.csproj.CopyComplete
 C:\Users\navaneeth\source\repos\RestaurantApp\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.dll
 C:\Users\navaneeth\source\repos\RestaurantApp\RestaurantApplication\RestaurantApplication\obj\Debug\RestaurantApplication.pdb
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\bin\Microsoft.Owin.Cors.dll
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\bin\System.Web.Cors.dll
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\bin\Microsoft.Owin.Cors.xml
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\bin\System.Web.Http.Owin.dll
+C:\Users\navaneeth\source\repos\RestaurantApplication\RestaurantApplication\bin\System.Web.Http.Owin.xml

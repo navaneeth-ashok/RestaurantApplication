@@ -10,12 +10,22 @@ namespace RestaurantApplication.Models
     public class ApplicationUser : IdentityUser
     {   
         public string EmployeeType { get; set; }
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType = null)
         {
+            //var userIdentity;
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            if (authenticationType is null)
+            {
+                var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+                return userIdentity;
+            }
+            else
+            {
+                var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+                return userIdentity;
+            }
             // Add custom user claims here
-            return userIdentity;
+            //return userIdentity;
         }
     }
 

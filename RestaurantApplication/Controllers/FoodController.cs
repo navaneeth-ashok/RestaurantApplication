@@ -25,13 +25,13 @@ namespace RestaurantApplication.Controllers
             //retrieve the list of food items
 
             // HttpClient Implementation
-            //string url = "FoodData/ListFoods";
-            //var resp = client.Execute(url);
-            //IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            string url = "FoodData/ListFoods";
+            var resp = client.ExecuteGet(url);
+            IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
 
             //Datacontroller implementation
-            FoodDataController foodDataController = new FoodDataController();
-            IEnumerable<FoodDto> foods = foodDataController.ListFoods();
+            //FoodDataController foodDataController = new FoodDataController();
+            //IEnumerable<FoodDto> foods = foodDataController.ListFoods();
 
             return View(foods);
         }
@@ -45,13 +45,15 @@ namespace RestaurantApplication.Controllers
         public ActionResult ListNew(int bookingId)
         {
             // retrieve the list of food items
-            //string url = "FoodData/ListFoods";
-            //HttpResponseMessage response = client.GetAsync(url).Result;
 
-            //IEnumerable<FoodDto> foods = response.Content.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            // HttpClient Implementation
+            string url = "FoodData/ListFoods";
+            var resp = client.ExecuteGet(url);
+            IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
 
-            FoodDataController foodDataController = new FoodDataController();
-            IEnumerable<FoodDto> foods = foodDataController.ListFoods();
+            // datacontroller implementation
+            //FoodDataController foodDataController = new FoodDataController();
+            //IEnumerable<FoodDto> foods = foodDataController.ListFoods();
 
             BookingIDFoodMenu foodsMenu = new BookingIDFoodMenu
             {
@@ -67,10 +69,10 @@ namespace RestaurantApplication.Controllers
         // Might include this at a later stage
         public ActionResult Details(int id)
         {
+            // HttpClient Implementation
             string url = "FoodData/FindFood/" + id;
-            HttpResponseMessage response = client.GetAsync(url).Result;
-
-            FoodDto foods = response.Content.ReadAsAsync<FoodDto>().Result;
+            var resp = client.ExecuteGet(url);
+            FoodDto foods = resp.ReadAsAsync<FoodDto>().Result;
             return View(foods);
         }
 

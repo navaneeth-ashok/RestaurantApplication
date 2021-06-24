@@ -16,7 +16,7 @@
 
 // function to show/hide the helper button
 document.onscroll = function () {
-    if (window.innerHeight + window.scrollY > document.body.clientHeight) {
+    if (window.innerHeight + window.scrollY >= document.body.clientHeight - 200) {
         document.getElementById('orderNavigator').style.display = 'none';
     } else if (window.innerWidth < 992) {
         document.getElementById('orderNavigator').style.display = 'block';
