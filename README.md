@@ -65,6 +65,9 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 | ------------- | ------------- | ------------- |
 |<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_1.png" height="400">|<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_2.png" height="400">|<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_3.png" height="400">|
 
+### ER Diagram
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/master/screenshots/ERDiagram.JPG" width="400">
+
 ## Things to Add
 
 - [ ] Once the order is delivered/served, the user will be presented with a page to rate the food.
