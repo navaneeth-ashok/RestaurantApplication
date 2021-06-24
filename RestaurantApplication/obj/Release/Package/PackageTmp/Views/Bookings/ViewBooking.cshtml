@@ -93,7 +93,7 @@
     }
 
     function successFunc(data, status) {
-        console.log(data['Status']);
+        //console.log(data['Status']);
         if (document.getElementById('bookingStatus').innerText == 'Pending' && data['Status'] == 1) {
             clearInterval(interval);
             location.reload();
@@ -102,7 +102,7 @@
     }
 
     function errorFunc() {
-        console.log('Error checking for updated order status');
+        console.error('Error checking for updated order status');
     }
 
 </script>

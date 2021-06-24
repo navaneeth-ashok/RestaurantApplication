@@ -16,7 +16,7 @@
 
 // function to show/hide the helper button
 document.onscroll = function () {
-    if (window.innerHeight + window.scrollY > document.body.clientHeight) {
+    if (window.innerHeight + window.scrollY >= document.body.clientHeight - 200) {
         document.getElementById('orderNavigator').style.display = 'none';
     } else if (window.innerWidth < 992) {
         document.getElementById('orderNavigator').style.display = 'block';
@@ -73,8 +73,8 @@ function renderOrderList() {
     // removing existing content
     previewTable.querySelector("tbody").innerHTML = "";
     for (order of orderList) {
-        console.log(order.querySelector(".foodName").textContent);
-        console.log(order.querySelector(".foodQ").value);
+        //console.log(order.querySelector(".foodName").textContent);
+        //console.log(order.querySelector(".foodQ").value);
         orderQuantity = parseInt(order.querySelector(".foodQ").value);
         if (orderQuantity > 0) {
             let row = previewTable.insertRow();

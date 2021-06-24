@@ -128,7 +128,7 @@
             function successFunc(data, status) {
                 // fetch the existing food type
                 const selectedVal = $('#FoodTypeID').children('option:selected').val();
-                console.log(selectedVal)
+                //console.log(selectedVal)
                 // clear all the options before repopulating them
                 $('#FoodTypeID').find('option').remove();
                 for (items of data) {
@@ -136,7 +136,7 @@
                     if (selectedVal == items['TypeID']) {
                         selected = "selected";
                     }
-                    console.log(items['TypeID'] + ' ' + items['TypeName']);
+                    //console.log(items['TypeID'] + ' ' + items['TypeName']);
                     $('#FoodTypeID').append(`<option value="${items['TypeID']}" ${selected}>${items['TypeName']}</option>`);
                     }
 

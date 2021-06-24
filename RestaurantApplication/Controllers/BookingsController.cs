@@ -5,15 +5,19 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Net.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using RestaurantApplication.Models;
+using System.Web.Script.Serialization;
 
 namespace RestaurantApplication.Controllers
 {
     public class BookingsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly Client client = new Client();
+        private JavaScriptSerializer jss = new JavaScriptSerializer();
 
         [Authorize]
         [HttpGet]
@@ -21,9 +25,16 @@ namespace RestaurantApplication.Controllers
         // This is for the admin to retrieve and view all the current bookings in the system
         public ActionResult Index()
         {
-            BookingsDataController bookingsDataController = new BookingsDataController();
-            IEnumerable<Booking> bookings =  bookingsDataController.GetBookings();
-            //return View(db.Bookings.ToList());
+            // http client implementation
+            string url = "BookingsData/GetBookings";
+            var resp = client.ExecuteGet(url);
+            
+            IEnumerable<Booking> bookings = resp.ReadAsAsync<IEnumerable<Booking>>().Result;
+            
+
+            // datacontroller implementation
+            //BookingsDataController bookingsDataController = new BookingsDataController();
+            //IEnumerable<Booking> bookings = bookingsDataController.GetBookings();
             return View(bookings);
         }
 
@@ -35,14 +46,23 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BookingsDataController bookingsDataController = new BookingsDataController();
-            System.Web.Http.IHttpActionResult actionResult = bookingsDataController.GetBooking(Convert.ToInt32(id));
-            OkNegotiatedContentResult<Booking> contentResult = actionResult as OkNegotiatedContentResult<Booking>;
-            if (contentResult == null)
-            {
-                return HttpNotFound();
-            }
-            Booking booking = contentResult.Content;
+
+            // httpClient implementation
+            string url = "BookingsData/GetBooking/" + Convert.ToInt32(id);
+            var resp = client.ExecuteGet(url);
+            Booking booking = resp.ReadAsAsync<Booking>().Result;
+
+
+            // datacontroller implementation
+            //BookingsDataController bookingsDataController = new BookingsDataController();
+            //System.Web.Http.IHttpActionResult actionResult = bookingsDataController.GetBooking(Convert.ToInt32(id));
+
+            //OkNegotiatedContentResult<Booking> contentResult = actionResult as OkNegotiatedContentResult<Booking>;
+            //if (contentResult == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //Booking booking = contentResult.Content;
 
             if (booking == null)
             {
@@ -58,14 +78,26 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BookingsDataController bookingsDataController = new BookingsDataController();
-            System.Web.Http.IHttpActionResult actionResult = bookingsDataController.ViewBooking(Convert.ToInt32(id));
-            OkNegotiatedContentResult<BookingDto> contentResult = actionResult as OkNegotiatedContentResult<BookingDto>;
-            if (contentResult == null)
+
+            // httpClient implementation
+            string url = "BookingsData/ViewBooking/" + Convert.ToInt32(id);
+            var resp = client.ExecuteGet(url);
+            BookingDto bookingDetail = resp.ReadAsAsync<BookingDto>().Result;
+            if (bookingDetail == null)
             {
                 return HttpNotFound();
             }
-            BookingDto bookingDetail = contentResult.Content;
+
+            // datacontroller implementation
+            //BookingsDataController bookingsDataController = new BookingsDataController();
+            //System.Web.Http.IHttpActionResult actionResult = bookingsDataController.ViewBooking(Convert.ToInt32(id));
+            //OkNegotiatedContentResult<BookingDto> contentResult = actionResult as OkNegotiatedContentResult<BookingDto>;
+            //if (contentResult == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //BookingDto bookingDetail = contentResult.Content;
+            
             return View(bookingDetail);
         }
 
@@ -85,9 +117,27 @@ namespace RestaurantApplication.Controllers
             // verify the model state before sending the booking object to controller
             if (ModelState.IsValid)
             {
-                BookingsDataController bookingsDataController = new BookingsDataController();
-                System.Web.Http.IHttpActionResult actionResult = bookingsDataController.CreateBooking(booking);
-                return RedirectToAction("ViewBooking/" + booking.BookingID);
+                // http client
+                string url = "BookingsData/CreateBooking";
+                string jsonPayLoad = jss.Serialize(booking);
+                var resp = client.ExecutePost(url, jsonPayLoad);
+                // if the post is successful read the respose and redirect the user to the booking page
+                if (resp.IsSuccessStatusCode)
+                {
+                    var responseContent = resp.Content;
+                    string responseString = responseContent.ReadAsStringAsync().Result;
+                    string newBookingId = jss.Deserialize<Booking>(responseString).BookingID.ToString();
+                    return RedirectToAction("ViewBooking/" + newBookingId);
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
+
+                // datacontroller
+                //BookingsDataController bookingsDataController = new BookingsDataController();
+                //System.Web.Http.IHttpActionResult actionResult = bookingsDataController.CreateBooking(booking);
+                //return RedirectToAction("ViewBooking/" + booking.BookingID);
             }
             // if model state is not valid, redirect the user to the booking page again.
             // enhancement : Add an error message to say the booking creation failed.
@@ -103,14 +153,21 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BookingsDataController bookingsDataController = new BookingsDataController();
-            System.Web.Http.IHttpActionResult actionResult = bookingsDataController.GetBooking(Convert.ToInt32(id));
-            OkNegotiatedContentResult<Booking> contentResult = actionResult as OkNegotiatedContentResult<Booking>;
-            if (contentResult == null)
-            {
-                return HttpNotFound();
-            }
-            Booking booking = contentResult.Content;
+
+            // httpClient implementation
+            string url = "BookingsData/GetBooking/" + Convert.ToInt32(id);
+            var resp = client.ExecuteGet(url);
+            Booking booking = resp.ReadAsAsync<Booking>().Result;
+
+            // controller implementation
+            //BookingsDataController bookingsDataController = new BookingsDataController();
+            //System.Web.Http.IHttpActionResult actionResult = bookingsDataController.GetBooking(Convert.ToInt32(id));
+            //OkNegotiatedContentResult<Booking> contentResult = actionResult as OkNegotiatedContentResult<Booking>;
+            //if (contentResult == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //Booking booking = contentResult.Content;
             return View(booking);
         }
 
@@ -124,9 +181,24 @@ namespace RestaurantApplication.Controllers
             // Preliminary inspection of ModelState validation before calling the API
             if (ModelState.IsValid)
             {
-                BookingsDataController bookingsDataController = new BookingsDataController();
-                System.Web.Http.IHttpActionResult actionResult = bookingsDataController.EditBooking(booking.BookingID, booking);
-                return RedirectToAction("Index");
+                // http client
+                string url = "BookingsData/EditBooking/" + Convert.ToInt32(booking.BookingID);
+                string jsonPayLoad = jss.Serialize(booking);
+                var resp = client.ExecutePost(url, jsonPayLoad);
+                // if the post is successful read the respose and redirect the user to the booking page
+                if (resp.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Error");
+                }
+
+                // controller
+                //BookingsDataController bookingsDataController = new BookingsDataController();
+                //System.Web.Http.IHttpActionResult actionResult = bookingsDataController.EditBooking(booking.BookingID, booking);
+                //return RedirectToAction("Index");
             } 
             else
             {
@@ -143,14 +215,21 @@ namespace RestaurantApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BookingsDataController bookingsDataController = new BookingsDataController();
-            System.Web.Http.IHttpActionResult actionResult = bookingsDataController.GetBooking(Convert.ToInt32(id));
-            OkNegotiatedContentResult<Booking> contentResult = actionResult as OkNegotiatedContentResult<Booking>;
-            if (contentResult == null)
-            {
-                return HttpNotFound();
-            }
-            Booking booking = contentResult.Content;
+
+            // httpClient implementation
+            string url = "BookingsData/GetBooking/" + Convert.ToInt32(id);
+            var resp = client.ExecuteGet(url);
+            Booking booking = resp.ReadAsAsync<Booking>().Result;
+
+            // controller implementation
+            //BookingsDataController bookingsDataController = new BookingsDataController();
+            //System.Web.Http.IHttpActionResult actionResult = bookingsDataController.GetBooking(Convert.ToInt32(id));
+            //OkNegotiatedContentResult<Booking> contentResult = actionResult as OkNegotiatedContentResult<Booking>;
+            //if (contentResult == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //Booking booking = contentResult.Content;
             return View(booking);
         }
 
@@ -160,8 +239,13 @@ namespace RestaurantApplication.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            BookingsDataController bookingsDataController = new BookingsDataController();
-            System.Web.Http.IHttpActionResult actionResult = bookingsDataController.DeleteBooking(Convert.ToInt32(id));
+            // httpclient implementation
+            string url = "BookingsData/DeleteBooking/" + Convert.ToInt32(id);
+            string jsonPayLoad = null;
+            var resp = client.ExecutePost(url, jsonPayLoad);
+            // controller implementation
+            //BookingsDataController bookingsDataController = new BookingsDataController();
+            //System.Web.Http.IHttpActionResult actionResult = bookingsDataController.DeleteBooking(Convert.ToInt32(id));
             return RedirectToAction("Index");
         }
 
