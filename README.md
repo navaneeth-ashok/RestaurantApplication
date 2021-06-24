@@ -62,9 +62,9 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/manage.png" width="500">
 
 ### Mobile
-<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_1.png" width="500">
-<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_2.png" width="500">
-<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_3.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_1.png" height="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_2.png" height="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_3.png" height="500">
 
 ## Things to Add
 
