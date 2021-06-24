@@ -53,9 +53,18 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 ## Screenshots
 
 ### Desktop
-- <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_1.png" width="300">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_1.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_2.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_3.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_4.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_5.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_6.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/manage.png" width="500">
 
 ### Mobile
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_1.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_2.png" width="500">
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_3.png" width="500">
 
 ## Things to Add
 
