@@ -47,6 +47,16 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
    1. Admins can add, edit, remove any Food Item from the list.
    2. Almost all CRUD functionalities for the same is provided now.
 
+## Note
+- For the api-user to fetch the data make sure your DB contains a user, and the user's detail is added to Client.cs under Models
+   
+## Screenshots
+
+### Desktop
+- ![Desktop Main Page](screenshots/desktop_1.png | width=100)
+
+### Mobile
+
 ## Things to Add
 
 - [ ] Once the order is delivered/served, the user will be presented with a page to rate the food.
@@ -58,7 +68,14 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 
 ~~BookingDateTime shows 01-01-0001 00:00:00 after the customer books the table~~
 
+## BugFixes
+
+- Order button not hiding once the user scrolls to the bottom : Fixed
+
 ## Updates
 
-- 15-06-2021 : Admin modules are reachable through /Admin link, Manage options removed from User facing Layout
-- 21-06-2021 : UI updated, Payment with RazorPay integrated, Google Maps API integrated
+- 15-06-2021 : Admin modules are reachable through /Admin link, Manage options removed from User facing Layout.
+- 21-06-2021 : UI updated, Payment with RazorPay integrated, Google Maps API integrated.
+- 23-06-2021 : Web-API token authentication added.
+- 24-06-2021 : FoodController and BookingsController are using http-client for fetching data.
+- 24-06-2021 : Full CRUD of Bookings implemented with httpClient
