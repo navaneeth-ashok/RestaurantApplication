@@ -55,7 +55,7 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 ### Desktop
 | | |
 | ------------- | ------------- |
-| <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_1.png" alt=""width="400" alt="welcome screen">  | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_2.png" width="400">  |
+| <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_1.png" alt="welcomeScreen" width="400">  | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_2.png" width="400">  |
 | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_3.png" width="400">  | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_4.png" width="400">  |
 |<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_5.png" width="400"> |<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_6.png" width="400"> |
 |<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/manage.png" width="400">|
