@@ -47,6 +47,24 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
    1. Admins can add, edit, remove any Food Item from the list.
    2. Almost all CRUD functionalities for the same is provided now.
 
+## Note
+- For the api-user to fetch the data, make sure your DB contains a user, and the user's detail is added to Client.cs under Models.
+   
+## Screenshots
+
+### Desktop
+| | |
+| ------------- | ------------- |
+| <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_1.png" alt="welcomeScreen" width="400">  | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_2.png" width="400">  |
+| <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_3.png" width="400">  | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_4.png" width="400">  |
+|<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_5.png" width="400"> |<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_6.png" width="400"> |
+|<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/manage.png" width="400">|
+
+### Mobile
+| | | |
+| ------------- | ------------- | ------------- |
+|<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_1.png" height="400">|<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_2.png" height="400">|<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/mobile_3.png" height="400">|
+
 ## Things to Add
 
 - [ ] Once the order is delivered/served, the user will be presented with a page to rate the food.
@@ -58,7 +76,14 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 
 ~~BookingDateTime shows 01-01-0001 00:00:00 after the customer books the table~~
 
+## BugFixes
+
+- Order button not hiding once the user scrolls to the bottom : Fixed
+
 ## Updates
 
-- 15-06-2021 : Admin modules are reachable through /Admin link, Manage options removed from User facing Layout
-- 21-06-2021 : UI updated, Payment with RazorPay integrated, Google Maps API integrated
+- 15-06-2021 : Admin modules are reachable through /Admin link, Manage options removed from User facing Layout.
+- 21-06-2021 : UI updated, Payment with RazorPay integrated, Google Maps API integrated.
+- 23-06-2021 : Web-API token authentication added.
+- 24-06-2021 : FoodController and BookingsController are using http-client for fetching data.
+- 24-06-2021 : Full CRUD of Bookings implemented with httpClient
