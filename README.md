@@ -58,7 +58,7 @@ The app is still in its alpha state, with bugs and security vulnerabilities as w
 | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_1.png" width="400">  | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_2.png" width="400">  |
 | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_3.png" width="400">  | <img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_4.png" width="400">  |
 |<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_5.png" width="400"> |
-<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_6.png" width="400"> |
+<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/desktop_6.png" width="400"> ||
 |<img src="https://github.com/navaneeth-ashok/RestaurantApplication/blob/http-client-dev/screenshots/manage.png" width="400">|
 
 ### Mobile
