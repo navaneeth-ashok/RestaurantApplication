@@ -17,6 +17,10 @@ namespace RestaurantApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/FoodData/ListFoods
+        /// <summary>
+        /// Get the list of food items present in the menu
+        /// </summary>
+        /// <returns>FoodDto objects containing only relevant items</returns>
         [HttpGet]
         public IEnumerable<FoodDto> ListFoods()
         {
@@ -38,6 +42,11 @@ namespace RestaurantApplication.Controllers
 
         // GET: api/FoodData/FindFood/5
         // This method is used to generate the FoodDto for customer, masking few sensitive details
+        /// <summary>
+        /// To display the details about a particular food item
+        /// </summary>
+        /// <param name="id">Food ID</param>
+        /// <returns>FoodDto object</returns>
         [ResponseType(typeof(Food))]
         [HttpGet]
         public IHttpActionResult FindFood(int id)
@@ -61,6 +70,11 @@ namespace RestaurantApplication.Controllers
         // GET: api/FoodData/Details/5
         // This method is used to generate the food object for admin,
         // contains all possible food db data
+        /// <summary>
+        /// Fetch and show all the details about a particular food item
+        /// </summary>
+        /// <param name="id">food id</param>
+        /// <returns>Food object</returns>
         [Authorize]
         [ResponseType(typeof(Food))]
         [HttpGet]
@@ -76,10 +90,13 @@ namespace RestaurantApplication.Controllers
             return Ok(food);
         }
 
+        // Get: /api/FoodData/ShowAllFoods
+        /// <summary>
+        /// This is for admin to view all the food details
+        /// </summary>
+        /// <returns>List of Food items</returns>
         [HttpGet]
         [Authorize]
-        // Get: /api/FoodData/ShowAllFoods
-        // This is for admin to view all the food details
         public IEnumerable<Food> ShowAllFoods()
         {
             List<Food> Foods = db.Foods.ToList();
@@ -87,10 +104,16 @@ namespace RestaurantApplication.Controllers
             return Foods;
         }
 
-        // PUT: api/FoodData/UpdateFood/5
+        /// <summary>
+        /// Update the food item details by the admin
+        /// </summary>
+        /// <param name="id">food id</param>
+        /// <param name="food">food object to be edited</param>
+        /// <returns>Save the changes to DB and returns HTTP status code</returns>
+        // POST: api/FoodData/UpdateFood/5
         [ResponseType(typeof(void))]
         [Authorize]
-        [HttpPut]
+        [HttpPost]
         public IHttpActionResult UpdateFood(int id, Food food)
         {
             if (!ModelState.IsValid)
@@ -124,6 +147,11 @@ namespace RestaurantApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Add a new food item to the DB
+        /// </summary>
+        /// <param name="food">Food Object</param>
+        /// <returns>returns the newly created object with the ID</returns>
         // POST: api/FoodData/AddFood
         [ResponseType(typeof(Food))]
         [HttpPost]
@@ -141,6 +169,11 @@ namespace RestaurantApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = food.FoodID }, food);
         }
 
+        /// <summary>
+        /// Delete the food item
+        /// </summary>
+        /// <param name="id">id of the food entry to be deleted</param>
+        /// <returns>HTTP status code</returns>
         // POST: api/FoodData/DeleteFood/5
         [ResponseType(typeof(Food))]
         [HttpPost]

@@ -16,9 +16,14 @@ namespace RestaurantApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /// <summary>
+        /// Get all the possible orderItems
+        /// </summary>
+        /// <returns>List of orderItems</returns>
         // GET: api/OrderItemsData
         [Authorize]
         [HttpGet]
+        [Authorize]
         public IEnumerable<OrderItem> GetOrdersItems()
         {
             List<OrderItem> orderItems = db.OrdersItems.Include(o => o.Booking).Include(o => o.Food).Include(o => o.OrderID).ToList();
@@ -26,8 +31,15 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: api/OrderItemsData/GetOrderItem/5
+        /// <summary>
+        /// Get all the order Items matching the orderID and foodID
+        /// </summary>
+        /// <param name="foodId"></param>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         [ResponseType(typeof(OrderItem))]
         [HttpGet]
+        [Authorize]
         public IHttpActionResult GetOrderItem(int foodId, int orderId)
         {
             OrderItem orderItem = db.OrdersItems.Find(foodId, orderId);
@@ -39,6 +51,13 @@ namespace RestaurantApplication.Controllers
             return Ok(orderItem);
         }
 
+        /// <summary>
+        /// For editing an existing order : pass orderID, foodID and the orderITem object
+        /// </summary>
+        /// <param name="foodId">foodID</param>
+        /// <param name="orderId">orderID</param>
+        /// <param name="orderItem">orderItem object</param>
+        /// <returns>HTTP  Status code</returns>
         // Post: api/OrderItemsData/5
         [ResponseType(typeof(void))]
         [Authorize]
@@ -78,6 +97,11 @@ namespace RestaurantApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Create a new OrderItem : Not required automatic method takes care of this functionality
+        /// </summary>
+        /// <param name="orderItem"></param>
+        /// <returns></returns>
         // POST: api/OrderItemsData
         [ResponseType(typeof(OrderItem))]
         [Authorize]
@@ -110,6 +134,12 @@ namespace RestaurantApplication.Controllers
             return CreatedAtRoute("DefaultApi", new { id = orderItem.FoodID }, orderItem);
         }
 
+        /// <summary>
+        /// Delete OrderItem ( pass the orderID and foodID )
+        /// </summary>
+        /// <param name="foodId">foodID</param>
+        /// <param name="orderId">OrderID</param>
+        /// <returns>HTTP Status Code</returns>
         // Post: api/OrderItemsData/DeleteOrderItem/5
         [ResponseType(typeof(OrderItem))]
         [Authorize]
@@ -183,6 +213,7 @@ namespace RestaurantApplication.Controllers
         // create newOrderItems objects and write to db
         // newOrderItems contains foodId, quantity, Price etc
         // find the total amount quantity
+        // POST : api/OrderItemsData/PlaceOrder/
         [HttpPost]
         public (int, OrderID) PlaceOrder(ICollection<string> foodID, ICollection<string> foodQuantity, int? bookingID)
         {

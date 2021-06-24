@@ -18,6 +18,10 @@ namespace RestaurantApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /// <summary>
+        /// Fetch all the orders placed 
+        /// </summary>
+        /// <returns>List of all the orders</returns>
         // GET: api/OrderIDsData/GetOrderIDs
         [Authorize]
         public IEnumerable<OrderID> GetOrderIDs()
@@ -26,6 +30,11 @@ namespace RestaurantApplication.Controllers
             return orderIDs;
         }
 
+        /// <summary>
+        /// Fetch a particular order
+        /// </summary>
+        /// <param name="id">id of the order</param>
+        /// <returns>OrderID object</returns>
         // GET: api/OrderIDsData/GetOrderID/5
         [ResponseType(typeof(OrderID))]
         [Authorize]
@@ -41,7 +50,11 @@ namespace RestaurantApplication.Controllers
         }
 
 
-        // GET:
+        /// <summary>
+        /// To generate a action method view  which will contain, order details, order status and total amount
+        /// </summary>
+        /// <param name="id">Order ID</param>
+        /// <returns>OrderFoodStatusDetail object containing all the relevant details about an order</returns>
         [HttpGet]
         public OrderStatusFoodDetail ListOrderStatus(int? id)
         {
@@ -70,6 +83,12 @@ namespace RestaurantApplication.Controllers
 
 
         // POST: api/OrderIDsData/EditOrderID/5
+        /// <summary>
+        /// TO edit an order ID
+        /// </summary>
+        /// <param name="id">order ID</param>
+        /// <param name="orderID">OrderID object with edited info</param>
+        /// <returns>HTTP Status code</returns>
         [ResponseType(typeof(void))]
         [Authorize]
         [HttpPost]
@@ -106,6 +125,11 @@ namespace RestaurantApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Create a new OrderID
+        /// </summary>
+        /// <param name="orderID">OrderID object</param>
+        /// <returns>Newly created orderID object with orderID</returns>
         // POST: api/OrderIDsData/CreateOrderID
         [ResponseType(typeof(OrderID))]
         [Authorize]
@@ -124,6 +148,11 @@ namespace RestaurantApplication.Controllers
         }
 
         // POST: api/OrderIDsData/5
+        /// <summary>
+        /// Delete an existing order
+        /// </summary>
+        /// <param name="id">OrderID</param>
+        /// <returns>HTTP status code</returns>
         [ResponseType(typeof(OrderID))]
         [Authorize]
         [HttpPost]

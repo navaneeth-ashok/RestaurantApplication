@@ -18,6 +18,10 @@ namespace RestaurantApplication.Controllers
 
 
         // GET: api/BookingsData/GetBookings
+        /// <summary>
+        /// Get all the bookings
+        /// </summary>
+        /// <returns> List of all the bookings</returns>
         [Authorize]
         public IEnumerable<Booking> GetBookings()
         {
@@ -27,6 +31,11 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: api/BookingsData/GetBooking/5
+        /// <summary>
+        /// Get the details about one booking
+        /// </summary>
+        /// <param name="id">booking id</param>
+        /// <returns>Booking object with the specified Booking ID</returns>
         [ResponseType(typeof(Booking))]
         [Authorize]
         public IHttpActionResult GetBooking(int id)
@@ -44,6 +53,11 @@ namespace RestaurantApplication.Controllers
         // This is public facing API
         // This can be used by non logged-in guests to view the status of their booking
         // In this view all the personal and sensitive information about the booking is hidden
+        /// <summary>
+        /// Used by unauthenticated users to view the booking status
+        /// </summary>
+        /// <param name="id">booking ID</param>
+        /// <returns>Booking DTO object with sensitive and private info removed</returns>
         [HttpGet]
         [ResponseType(typeof(Booking))]
         public IHttpActionResult ViewBooking(int id)
@@ -65,6 +79,12 @@ namespace RestaurantApplication.Controllers
         }
 
         // POST: api/BookingsData/EditBooking/5
+        /// <summary>
+        /// Edit the status of a booking
+        /// </summary>
+        /// <param name="id">booking ID</param>
+        /// <param name="booking">Booking Model object on which the edit has to happen</param>
+        /// <returns>HTTP response code</returns>
         [ResponseType(typeof(void))]
         [Authorize]
         [HttpPost]
@@ -102,8 +122,12 @@ namespace RestaurantApplication.Controllers
         }
 
         // POST: api/BookingsData/CreateBooking
+        /// <summary>
+        /// Create a booking
+        /// </summary>
+        /// <param name="booking">Booking Object</param>
+        /// <returns>booking object newly created with booking ID</returns>
         [ResponseType(typeof(Booking))]
-        [Authorize]
         [HttpPost]
         public IHttpActionResult CreateBooking(Booking booking)
         {
@@ -119,6 +143,11 @@ namespace RestaurantApplication.Controllers
         }
 
         // POST: api/BookingsData/DeleteBooking/5
+        /// <summary>
+        /// Delete an existing booking
+        /// </summary>
+        /// <param name="id">bookign ID</param>
+        /// <returns>HTTP status code if pass : Else same delete page if failed</returns>
         [ResponseType(typeof(Booking))]
         [Authorize]
         [HttpPost]

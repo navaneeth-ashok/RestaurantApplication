@@ -25,7 +25,7 @@ namespace RestaurantApplication.Controllers
         }
 
         // GET: OrderItems/Details/5
-        //[Authorize]
+        [Authorize]
         public ActionResult Details(int? foodId, int? orderId)
         {
             if (foodId == null || orderId == null)
