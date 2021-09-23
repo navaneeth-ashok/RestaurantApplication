@@ -382,6 +382,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\RestaurantApplicationNavaneeth - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\restaurantnav - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\restaurantnav2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

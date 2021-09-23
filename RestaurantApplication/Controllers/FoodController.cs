@@ -25,13 +25,13 @@ namespace RestaurantApplication.Controllers
             //retrieve the list of food items
 
             // HttpClient Implementation
-            string url = "FoodData/ListFoods";
-            var resp = client.ExecuteGet(url);
-            IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            //string url = "FoodData/ListFoods";
+            //var resp = client.ExecuteGet(url);
+            //IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
 
             //Datacontroller implementation
-            //FoodDataController foodDataController = new FoodDataController();
-            //IEnumerable<FoodDto> foods = foodDataController.ListFoods();
+            FoodDataController foodDataController = new FoodDataController();
+            IEnumerable<FoodDto> foods = foodDataController.ListFoods();
 
             return View(foods);
         }
@@ -47,13 +47,13 @@ namespace RestaurantApplication.Controllers
             // retrieve the list of food items
 
             // HttpClient Implementation
-            string url = "FoodData/ListFoods";
-            var resp = client.ExecuteGet(url);
-            IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
+            //string url = "FoodData/ListFoods";
+            //var resp = client.ExecuteGet(url);
+            //IEnumerable<FoodDto> foods = resp.ReadAsAsync<IEnumerable<FoodDto>>().Result;
 
             // datacontroller implementation
-            //FoodDataController foodDataController = new FoodDataController();
-            //IEnumerable<FoodDto> foods = foodDataController.ListFoods();
+            FoodDataController foodDataController = new FoodDataController();
+            IEnumerable<FoodDto> foods = foodDataController.ListFoods();
 
             BookingIDFoodMenu foodsMenu = new BookingIDFoodMenu
             {
